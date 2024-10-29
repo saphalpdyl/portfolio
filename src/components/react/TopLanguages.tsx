@@ -4,7 +4,7 @@ import { actions } from "astro:actions";
 import Spinner from "./Spinner";
 import Skeleton from "./common/Skeleton";
 
-const PROGRESS_BAR_TOTAL_LENGTH = 16;
+const PROGRESS_BAR_TOTAL_LENGTH = 20;
 const TOP_LANGUAGES = 6;
 
 function ProgressBar({ percentage } : {
