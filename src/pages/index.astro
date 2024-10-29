@@ -2,6 +2,7 @@
 import BackgroundGrid from "../components/react/BackgroundGrid"
 import TopLanguages from "../components/react/TopLanguages";
 import TopProjects from "../components/react/TopProjects";
+
 import { Image } from "astro:assets";
 
 import GithubLogo from "../assets/github-mark.svg";
@@ -14,6 +15,12 @@ import GithubLogo from "../assets/github-mark.svg";
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Saphal's home</title>
+
+		<style is:global>
+			* {
+				cursor: url("/public/cursor_16.png"), default;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="root" class="flex flex-col gap-2 h-screen w-screen items-center p-10">
