@@ -21,7 +21,7 @@ export default defineAction({
                           name
                           nameWithOwner
                           description
-
+                          url
                       }
                   }
               }

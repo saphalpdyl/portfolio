@@ -4,9 +4,10 @@ import { actions } from "astro:actions";
 import Spinner from "./Spinner";
 
 interface Repository {
-  description: string,
-  name: string,
-  nameWithOwner: string,
+  description: string;
+  name: string;
+  nameWithOwner: string;
+  url: string;
 }
 
 type ProjectCardProps = {
@@ -18,7 +19,7 @@ function ProjectCard({ project }: ProjectCardProps) {
     <div>
       <span className="text-md font-semibold text-blue-500">{ project.name }</span>
     </div>
-    <a className="text-[11px] text-gray-800 underline cursor-pointer hover:text-black">{ project.nameWithOwner }</a>
+    <a target="_blank" href={project.url} className="text-[11px] text-gray-800 underline cursor-pointer hover:text-black">{ project.nameWithOwner }</a>
     <p className="text-xs text-gray-600 mt-2">{ project.description }</p>
   </div>
 }
