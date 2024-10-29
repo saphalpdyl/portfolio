@@ -3,7 +3,7 @@ import { actions } from "astro:actions";
 
 import Spinner from "./Spinner";
 
-const PROGRESS_BAR_TOTAL_LENGTH = 10;
+const PROGRESS_BAR_TOTAL_LENGTH = 16;
 const TOP_LANGUAGES = 6;
 
 function ProgressBar({ percentage } : {
@@ -43,8 +43,8 @@ function TopLanguages({ githubLogo }: {
   if (!languages) return <Spinner />
 
   return (
-    <div className="flex flex-col font-serif">
-      <div className="flex gap-2 justify-center items-center font-semibold">
+    <div className="flex flex-col font-serif gap-2">
+      <div className="flex gap-2 items-center font-semibold">
         Most Used Languages on GitHub 
         <div className="w-6 h-6">
           { githubLogo }
@@ -54,8 +54,8 @@ function TopLanguages({ githubLogo }: {
         {
           languages && languages.slice(0,TOP_LANGUAGES).map(([language, percentage]) => {
             return <>
-              {`${language.padEnd(30)}: `}
-              <ProgressBar percentage={parseFloat(percentage)} />
+              <span>{`${language.padEnd(30)}: `}</span>
+              <ProgressBar key={language} percentage={parseFloat(percentage)} />
             </>
           })
         }
