@@ -43,10 +43,10 @@ function TopLanguages({ githubLogo }: {
   if (!languages) return <Spinner />
 
   return (
-    <div className="flex flex-col font-serif font-semibold">
-      <div className="flex gap-2 justify-center items-center">
+    <div className="flex flex-col font-serif">
+      <div className="flex gap-2 justify-center items-center font-semibold">
         Most Used Languages on GitHub 
-        <div>
+        <div className="w-6 h-6">
           { githubLogo }
         </div>
       </div>

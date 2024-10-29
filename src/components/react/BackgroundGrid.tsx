@@ -25,8 +25,8 @@ function BackgroundGrid() {
       className="absolute inset-0 z-[-3] pointer-events-none"
       style={{
         backgroundImage: `
-          linear-gradient(to right, #e5e7eb44 1px, transparent 1px),
-          linear-gradient(to bottom, #e5e7eb44 1px, transparent 1px)
+          linear-gradient(to right, #e5e7ebbb 1px, transparent 1px),
+          linear-gradient(to bottom, #e5e7ebbb 1px, transparent 1px)
         `,
         backgroundSize: `${gridSize}px ${gridSize}px`,
         mask: `radial-gradient(circle ${revealRadius}px at ${mousePos.x}px ${mousePos.y}px, 
