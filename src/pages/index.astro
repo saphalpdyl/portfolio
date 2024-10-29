@@ -1,6 +1,7 @@
 ---
 import BackgroundGrid from "../components/react/BackgroundGrid"
 import TopLanguages from "../components/react/TopLanguages";
+import TopProjects from "../components/react/TopProjects";
 import { Image } from "astro:assets";
 
 import GithubLogo from "../assets/github-mark.svg";
@@ -25,7 +26,9 @@ import GithubLogo from "../assets/github-mark.svg";
 			</div>
 
 			<div class="flex lg:flex-row flex-col lg:w-full lg:px-40">
-				<div class="flex-1"></div>
+				<div class="flex-1">
+					<TopProjects client:idle />
+				</div>
 				<div class="flex-1">
 					<TopLanguages client:idle>
 							<Image slot="githubLogo" src={GithubLogo} alt="Github logo"/>
