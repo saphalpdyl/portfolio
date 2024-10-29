@@ -18,11 +18,11 @@ function BackgroundGrid() {
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
     }
-  });
+  }, []);
   
   return (
     <div 
-      className="absolute inset-0 z-[-3]"
+      className="absolute inset-0 z-[-3] pointer-events-none"
       style={{
         backgroundImage: `
           linear-gradient(to right, #e5e7eb44 1px, transparent 1px),
