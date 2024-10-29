@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { actions } from "astro:actions";
 import Spinner from "./Spinner";
+import Skeleton from "./common/Skeleton";
 
 interface Repository {
   description: string;
@@ -36,7 +37,14 @@ function TopProjects() {
     _refreshProjects();
   }, [])
 
-  if ( !projects ) return <Spinner />
+  if ( !projects ) return (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="w-32 h-8" />
+      <Skeleton className="w-full h-20" />
+      <Skeleton className="w-full h-20" />
+      <Skeleton className="w-full h-20" />
+    </div>
+  )
   
   return (
     <div className="flex flex-col gap-2">

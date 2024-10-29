@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { actions } from "astro:actions";
 
 import Spinner from "./Spinner";
+import Skeleton from "./common/Skeleton";
 
 const PROGRESS_BAR_TOTAL_LENGTH = 16;
 const TOP_LANGUAGES = 6;
@@ -40,7 +41,16 @@ function TopLanguages({ githubLogo }: {
     _refreshLanguages();
   }, []);
 
-  if (!languages) return <Spinner />
+  if (!languages) return (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="w-80 h-8" />
+      <Skeleton className="w-full h-6" />
+      <Skeleton className="w-full h-6" />
+      <Skeleton className="w-full h-6" />
+      <Skeleton className="w-full h-6" />
+      <Skeleton className="w-full h-6" />
+    </div>
+  )
 
   return (
     <div className="flex flex-col font-serif gap-2">
