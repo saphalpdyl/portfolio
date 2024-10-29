@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { actions } from 'astro:actions';
+import { useState, useEffect } from 'react';
 
 function BackgroundGrid() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -12,7 +13,12 @@ function BackgroundGrid() {
     });
   }
 
-  useEffect(() => {
+  useEffect(() => {    
+    void async function() {
+      const d = await actions.getTopLanguages();
+      console.log(d);
+    }();
+    
     document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
