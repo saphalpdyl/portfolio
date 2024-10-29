@@ -1,0 +1,27 @@
+---
+interface Props {
+  education: string;
+  institutionName: string;
+  date: string;
+  institutionLocation: string;
+}
+
+const { institutionName, date, education, institutionLocation} = Astro.props;
+
+import { Image } from 'astro:assets';
+import LocationIcon from "../../assets/location_icon.png";
+---
+
+<div class="flex flex-col max-w-[300px]">
+  <span class="text-lg text-neutral-700 font-bold">{ education }</span>
+  <div class="flex gap-6 text-[10px] text-gray-600">
+    <span class="font-light">{date}</span>
+    <div class="flex items-center gap-1">
+      <div class="flex items-center justify-center">
+        <Image src={LocationIcon} alt="Location" width={12} />
+      </div>
+      <span>{ institutionLocation }</span>
+    </div>
+  </div>
+  <span class="text-[13px] text-gray-600 italic font-serif">{ institutionName }</span>
+</div>
