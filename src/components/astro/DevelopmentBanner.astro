@@ -1,0 +1,10 @@
+---
+import Banner from "./Banner.astro";
+
+const isDevelopmentMode = import.meta.env.DEPLOY_MODE != "PROD";
+
+---
+
+{
+  isDevelopmentMode ? <Banner title="⚠️ The project is still under development ⚠️" className="bg-amber-500"/> : null
+}
