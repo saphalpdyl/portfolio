@@ -1,0 +1,13 @@
+---
+
+interface Props {
+  title: string;
+  className: string;
+}
+
+const { title, className } = Astro.props;
+---
+
+<div class={`absolute w-full h-6 top-0 flex justify-center items-center ${className}`}>
+  <span class="font-bold text-white text-xs text-center">{ title }</span>
+</div>
