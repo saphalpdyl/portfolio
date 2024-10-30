@@ -4,6 +4,7 @@ import TopLanguages from "../components/react/TopLanguages";
 import TopProjects from "../components/react/TopProjects";
 
 import EducationItem from "../components/astro/EducationItem.astro";
+import DevelopmentBanner from "../components/astro/DevelopmentBanner.astro";
 
 import { Image } from "astro:assets";
 
@@ -26,6 +27,7 @@ import GithubLogo from "../assets/github-mark.svg";
 	</head>
 	<body>
 		<div id="root" class="flex flex-col gap-2 h-screen w-screen items-center p-10">
+			<DevelopmentBanner />
 			<BackgroundGrid client:visible />
 			
 			<span class="text-5xl font-serif font-semibold">Saphal Poudyal</span>
