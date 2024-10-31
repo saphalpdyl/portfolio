@@ -76,14 +76,14 @@ function BusyStatusIndicator() {
     return <Chip 
       type="busy" 
       text="Saphal is currently busy" 
-      note={status.freeAt != null ? `Will be free in ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
+      note={status.freeAt != null ? `Will be free on ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
       />
     }
     
     return <Chip 
     type="free" 
     text="Saphal is currently free" 
-    note={status?.busyAt != null ? `Will be busy in ${status?.busyAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
+    note={status?.busyAt != null ? `Will be busy on ${status?.busyAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
   />
 }
 
