@@ -1,6 +1,8 @@
 import { actions } from "astro:actions";
 import { useEffect, useState } from "react";
 
+const DATE_FORMAT_OPTIONS = { hour: '2-digit', minute: '2-digit' } satisfies Intl.DateTimeFormatOptions;
+
 interface ChipProps {
   type: "loading" | "free" | "busy";
   text: string;
@@ -74,14 +76,14 @@ function BusyStatusIndicator() {
     return <Chip 
       type="busy" 
       text="Saphal is currently busy" 
-      note={status.freeAt != null ? `Will be free in ${status.freeAt?.toLocaleTimeString()}` : ""}
+      note={status.freeAt != null ? `Will be free in ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
       />
     }
     
     return <Chip 
     type="free" 
     text="Saphal is currently free" 
-    note={status?.busyAt != null ? `Will be busy in ${status?.busyAt?.toLocaleTimeString()}` : ""}
+    note={status?.busyAt != null ? `Will be busy in ${status?.busyAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
   />
 }
 
