@@ -4,13 +4,6 @@ import { z } from "astro:schema";
 const DEFAULT_DAYS_AHEAD = 5;
 const DEFAULT_CALENDAR_ID = "saphalpdyl@gmail.com";
 
-export type FreeBusyStatus = {
-  status: "busy" | "free";
-} & (
-  { status: "busy", freeAt: Date | null}
-  | { status: "free"; busyAt: Date | null}
-);
-
 export default defineAction({
   input: z.object({
     daysAhead: z.number().min(1, 'cannot be less than 1').default(DEFAULT_DAYS_AHEAD),

@@ -2,6 +2,7 @@
 import BackgroundGrid from "../components/react/BackgroundGrid"
 import TopLanguages from "../components/react/TopLanguages";
 import TopProjects from "../components/react/TopProjects";
+import BusyStatusIndicator from "../components/react/BusyStatusIndicator";
 
 import EducationItem from "../components/astro/EducationItem.astro";
 import DevelopmentBanner from "../components/astro/DevelopmentBanner.astro";
@@ -37,10 +38,10 @@ import School from "../assets/icons/school.svg";
 				Full-stack developer | 
 				CS Student at the University of Southern Mississppi
 			</div>
+			<BusyStatusIndicator client:idle />
 
 			<div class="flex flex-col lg:flex-row lg:w-full gap-10 my-4 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1 flex flex-col gap-2 items-end">
-					
 				</div>
 				<div class="flex-1">
 					<span class="flex gap-2 font-serif font-semibold text-lg underline">
