@@ -30,17 +30,7 @@ export default defineAction({
         ]
       })
     });
-
-    console.log(JSON.stringify({
-      timeMin: timeMin.toISOString(),
-      timeMax: timeMax.toISOString(),
-      items: [
-        {
-          id: DEFAULT_CALENDAR_ID,
-        }
-      ]
-    }));
-    console.log("ERROR RESPONSE: ", rawResponse);
+    
     const response = await rawResponse.json();
 
     const busySchedule: {
