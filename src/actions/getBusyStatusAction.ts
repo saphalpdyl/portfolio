@@ -31,7 +31,7 @@ export default defineAction({
       })
     });
 
-
+    console.log("ERROR RESPONSE: ", rawResponse);
     const response = await rawResponse.json();
 
     const busySchedule: {
