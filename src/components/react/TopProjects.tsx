@@ -25,7 +25,11 @@ function ProjectCard({ project }: ProjectCardProps) {
   </div>
 }
 
-function TopProjects() {
+type TopProjectsProps = {
+  projectsLogo?: React.ReactNode;
+}
+
+function TopProjects({ projectsLogo }: TopProjectsProps) {
   const [ projects, setProjects ] = useState<null | Repository[]>(null);
 
   async function _refreshProjects() {
@@ -48,7 +52,12 @@ function TopProjects() {
   
   return (
     <div className="flex flex-col gap-2">
-      <span className="font-serif font-semibold text-lg">Top Projects</span>
+      <span className="flex gap-2 font-serif font-semibold text-lg underline">
+        <div className="w-6 h-6">
+          { projectsLogo }
+        </div>
+        Top Projects
+      </span>
       <div className="flex flex-col gap-4">
         {
           projects.map(proj => <ProjectCard project={proj} />)

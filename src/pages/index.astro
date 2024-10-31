@@ -8,7 +8,9 @@ import DevelopmentBanner from "../components/astro/DevelopmentBanner.astro";
 
 import { Image } from "astro:assets";
 
-import GithubLogo from "../assets/github-mark.svg";
+import GithubLogo from "../assets/icons/github-mark.svg";
+import FolderGit2 from "../assets/icons/folder-git-2.svg";
+import School from "../assets/icons/school.svg";
 ---
 
 <html lang="en">
@@ -40,25 +42,35 @@ import GithubLogo from "../assets/github-mark.svg";
 				<div class="flex-1 flex flex-col gap-2 items-end">
 					
 				</div>
-				<div class="flex-1 divide-y-2 space-y-4">
-					<EducationItem 
-						education="Bachelor's in Computer Science"
-						date="2024 Aug - Present"
-						institutionName="The University of Southern Mississippi"
-						institutionLocation="Hattiesburg, MS"
-					/>
-					<EducationItem 
-						education="High School in C.S Stream"
-						date="2019 Aug - 2023 Aug"
-						institutionName="Ambition Academy Secondary School"
-						institutionLocation="Kathmandu, Nepal"
-					/>
+				<div class="flex-1">
+					<span class="flex gap-2 font-serif font-semibold text-lg underline">
+						<div class="w-6 h-6">
+						<Image src={School} alt="School logo"/>
+						</div>
+						Education
+					</span>
+					<div class="divide-y-2 space-y-4">
+						<EducationItem 
+							education="Bachelor's in Computer Science"
+							date="2024 Aug - Present"
+							institutionName="The University of Southern Mississippi"
+							institutionLocation="Hattiesburg, MS"
+						/>
+						<EducationItem 
+							education="High School in C.S Stream"
+							date="2019 Aug - 2023 Aug"
+							institutionName="Ambition Academy Secondary School"
+							institutionLocation="Kathmandu, Nepal"
+						/>
+					</div>
 				</div>
 			</div>
-
+			
 			<div class="flex lg:flex-row flex-col lg:w-full gap-10 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1">
-					<TopProjects client:idle />
+					<TopProjects client:idle>
+						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
+					</TopProjects>
 				</div>
 				<div class="flex-1">
 					<TopLanguages client:idle>

@@ -60,11 +60,11 @@ function TopLanguages({ githubLogo }: {
 
   return (
     <div className="flex flex-col font-serif gap-2">
-      <div className="flex text-lg gap-2 items-center font-semibold">
-        Most Used Languages on GitHub 
+      <div className="flex text-lg gap-2 items-center font-semibold underline">
         <div className="w-6 h-6">
           { githubLogo }
         </div>
+        Most Used Languages on GitHub 
       </div>
       <div className="grid grid-cols-2 font-serif">
         {
