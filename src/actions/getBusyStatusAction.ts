@@ -2,7 +2,6 @@ import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 
 const DEFAULT_DAYS_AHEAD = 5;
-const DEFAULT_CALENDAR_ID = "saphalpdyl@gmail.com";
 
 export default defineAction({
   input: z.object({
@@ -25,7 +24,7 @@ export default defineAction({
         
         items: [
           {
-            id: DEFAULT_CALENDAR_ID,
+            id: import.meta.env.GOOGLE_CALENDAR_ID,
           }
         ]
       })
@@ -36,7 +35,7 @@ export default defineAction({
     const busySchedule: {
       start: string,
       end: string,
-    }[] = response.calendars[DEFAULT_CALENDAR_ID].busy;
+    }[] = response.calendars[import.meta.env.GOOGLE_CALENDAR_ID].busy;
     
     const now = new Date();
 
