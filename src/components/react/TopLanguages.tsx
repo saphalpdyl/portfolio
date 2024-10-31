@@ -5,14 +5,16 @@ import Spinner from "./Spinner";
 import Skeleton from "./common/Skeleton";
 
 const PROGRESS_BAR_TOTAL_LENGTH = 20;
+const PROGRESS_BAR_SMALL_TOTAL_LENGTH = 10;
 const TOP_LANGUAGES = 6;
 
-function ProgressBar({ percentage, color } : {
+function ProgressBar({ percentage, color, progressBarLength } : {
   percentage: number,
   color: string,
+  progressBarLength: number,
 }) {
-  const filledBlocks = Math.round((percentage / 100) * PROGRESS_BAR_TOTAL_LENGTH);
-  const emptyBlocks = PROGRESS_BAR_TOTAL_LENGTH - filledBlocks;
+  const filledBlocks = Math.round((percentage / 100) * progressBarLength);
+  const emptyBlocks = progressBarLength - filledBlocks;
   
   return (
     <div 
@@ -32,6 +34,7 @@ function TopLanguages({ githubLogo }: {
   githubLogo?: React.ReactNode,
 }) {
   const [languages, setLanguages] = useState<null | string[][]>(null);
+  const [progressBarLength, setProgressBarLength] = useState(PROGRESS_BAR_TOTAL_LENGTH);
 
   async function _refreshLanguages() {
     const data = await actions.getTopLanguages({
@@ -43,8 +46,20 @@ function TopLanguages({ githubLogo }: {
     setLanguages(data.data!);
   }
   
+  function _recalculateProgressBarLength() {
+    if ( window.innerWidth < 750 ) setProgressBarLength(PROGRESS_BAR_SMALL_TOTAL_LENGTH);
+    else setProgressBarLength(PROGRESS_BAR_TOTAL_LENGTH);
+  }
+  
   useEffect(() => {
     _refreshLanguages();
+    _recalculateProgressBarLength();
+
+    window.addEventListener('resize', _recalculateProgressBarLength);
+
+    return () => {
+      window.removeEventListener('resize', _recalculateProgressBarLength);
+    }
   }, []);
 
   if (!languages) return (
@@ -71,7 +86,7 @@ function TopLanguages({ githubLogo }: {
           languages && languages.slice(0,TOP_LANGUAGES).map(([language, percentage, color]) => {
             return <>
               <span>{`${language.padEnd(30)}: `}</span>
-              <ProgressBar key={language} percentage={parseFloat(percentage)} color={color}/>
+              <ProgressBar key={language} percentage={parseFloat(percentage)} color={color} progressBarLength={progressBarLength}/>
             </>
           })
         }
