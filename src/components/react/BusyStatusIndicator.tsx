@@ -64,6 +64,8 @@ function BusyStatusIndicator() {
     }
   }, []);
   
+  if ( error ) return <span className="text-red-500 text-xs"> Widget error: { error }</span>
+  
   if ( loading ) {
     return <Chip type="loading" text="Searching calendar for events" />
   }
