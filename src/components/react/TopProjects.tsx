@@ -48,7 +48,7 @@ function TopProjects() {
   
   return (
     <div className="flex flex-col gap-2">
-      <span className="font-serif font-semibold">Top Projects</span>
+      <span className="font-serif font-semibold text-lg">Top Projects</span>
       <div className="flex flex-col gap-4">
         {
           projects.map(proj => <ProjectCard project={proj} />)

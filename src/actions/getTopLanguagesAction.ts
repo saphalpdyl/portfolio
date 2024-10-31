@@ -65,7 +65,10 @@ export default defineAction({
       const data: TopLanguagesResponse = await rawResponse.json();
   
       const languageUsage: {
-        [prop: string]: number,
+        [prop: string]: {
+          size: number,
+          color: string
+        }
       } = {};
   
       // Iterate through all repositories
@@ -74,19 +77,26 @@ export default defineAction({
         for (const { size, node } of repo.languages.edges) {
           // Update the usage for each language
           if (languageUsage[node.name]) {
-            languageUsage[node.name] += size;
+            languageUsage[node.name].size += size;
           } else {
-            languageUsage[node.name] = size;
+            languageUsage[node.name] = {
+              size,
+              color: node.color
+            };
           }
         }
       }
   
       // Calculate the total size across all languages
-      const totalSize = Object.values(languageUsage).reduce((acc, size) => acc + size, 0);
+      const totalSize = Object.values(languageUsage).reduce((acc, lang) => acc + lang.size, 0);
   
-      // Convert to a list of [language, percentage] tuples and sort by percentage in descending order
+      // Convert to a list of [language, percentage, color] tuples and sort by percentage in descending order
       return Object.entries(languageUsage)
-        .map(([language, size]) => [language, (size / totalSize * 100).toFixed(2)])
+        .map(([language, { size, color }]) => [
+          language, 
+          (size / totalSize * 100).toFixed(2),
+          color
+        ])
         .sort((a, b) => parseFloat(b[1]) - parseFloat(a[1]));
     } catch(e) {
       console.log("ERROR on getTopLanguagesServerAction: ", e);
