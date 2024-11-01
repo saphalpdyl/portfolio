@@ -60,11 +60,11 @@ function CurrentlyPlaying({
   </div>
 
   if ( offline ) return (
-    <div className="h-8 flex items-center px-2 bg-gray-50 border-2 border-gray-300 justify-center gap-2 rounded-lg text-gray-800 font-serif text-xs">
+    <div className="flex items-center py-1 px-2 bg-gray-50 border-2 border-gray-300 justify-center gap-2 rounded-lg text-gray-800 font-serif text-xs">
       <div className="w-4 h-4">
         { spotifyLogo }
       </div>
-      Not Listening to anything
+      <span className="text-xs text-gray-600">Saphal is not connected</span>
     </div>
   )
   
