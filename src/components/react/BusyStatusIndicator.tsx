@@ -41,11 +41,8 @@ function BusyStatusIndicator() {
   const [ status, setStatus ] = useState<null | FreeBusyStatus>(null);
   
   async function _refreshStatus() {
-    setLoading(true);
-    
     const data = await actions.getBusyStatus({});
     if ( data.error ) {
-      console.log(data.error);
       setError("Some error has occurred.")
       setLoading(false);
       setStatus(null);
@@ -59,7 +56,7 @@ function BusyStatusIndicator() {
   
   useEffect(() => {
     _refreshStatus();
-    const _interval = setInterval(_refreshStatus, 100000);
+    const _interval = setInterval(_refreshStatus, 5000);
 
     return () => {
       clearTimeout(_interval);
