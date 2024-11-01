@@ -70,7 +70,7 @@ function CurrentlyPlaying({
   
   if ( playing && playing.status === "playing" ) {
     return (
-      <div className="py-1 px-2 bg-gray-50 border-2 border-gray-300 shadow-sm rounded-xl flex items-center gap-2">
+      <div className="relative overflow-hidden py-1 px-2 bg-gray-50 border-2 border-gray-300 shadow-sm rounded-xl flex items-center gap-2">
         <div className="w-9 h-9 rounded-full border-2 border-gray-600"
           style={{
             backgroundImage: `url(${playing.data.item.album.images[0].url as string})`,
@@ -89,6 +89,13 @@ function CurrentlyPlaying({
           <span className="font-serif">{playing.data.item.name}</span>
           <span className="text-[10px] text-gray-600 italic">{playing.data.item.artists.map((a: any) => a.name).join(", ")}</span>
         </div>  
+
+        <div
+          style={{
+            width: `${(playing.data.progress_ms / playing.data.item.duration_ms) * 100}%`,
+          }}
+          className={`bg-slate-400 h-[2px] absolute bottom-0 left-0 ${playing.data.is_playing ? "animate-pulse" : ""}`}
+        />
       </div>
     );  
   }
