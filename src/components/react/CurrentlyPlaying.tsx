@@ -69,6 +69,10 @@ function CurrentlyPlaying({
   )
   
   if ( playing && playing.status === "playing" ) {
+    const originalName = playing.data.item.name;
+    console.log(playing.data.item.explicit)
+    const parsedName = playing.data.item.explicit ? originalName.replace(/[^ ]/g, '*') : originalName;
+    
     return (
       <div className="relative overflow-hidden py-1 px-2 bg-gray-50 border-2 border-gray-300 shadow-sm rounded-xl flex items-center gap-2">
         <div className="w-9 h-9 rounded-full border-2 border-gray-600"
@@ -86,7 +90,7 @@ function CurrentlyPlaying({
               Currently {playing.data.is_playing ? "Listening" : "Paused on"}
             </span>
           </div>
-          <span className="font-serif">{playing.data.item.name}</span>
+          <span className="font-serif">{parsedName}</span>
           <span className="text-[10px] text-gray-600 italic">{playing.data.item.artists.map((a: any) => a.name).join(", ")}</span>
         </div>  
 
