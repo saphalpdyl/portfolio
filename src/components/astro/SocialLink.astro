@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  logo: ImageMetadata;
+  alt: string;
+  text: string;
+  href: string;
+}
+
+const {logo, alt, text, href} = Astro.props;
+---
+<div class="flex items-center gap-1 text-xs">
+  <div class="w-4 h-4">
+    <Image src={logo} alt={alt}/>
+  </div>
+  <a href={href} class="underline italic text-blue-500 cursor-pointer">{text}</a>
+</div>
