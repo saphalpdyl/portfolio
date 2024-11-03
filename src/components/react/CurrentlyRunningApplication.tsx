@@ -16,71 +16,79 @@ function CurrentlyRunningApplication() {
   const [processData, setProcessData] = useState<{
     [_: string]: boolean,
   } | null>(null);
-  const serverHasDataRef = useRef(false);
+  const [isConnected, setIsConnected] = useState(true);
+  const lastSuccessfulUpdateRef = useRef<number>(Date.now());
   
   async function refreshProcessStatus() {
-    // @ts-ignore
-    const [hasData, data, previousTimestamp] = (await actions.getProcessStatus()).data;
+    try {
+      // @ts-ignore
+      const [hasData, data, previousTimestamp] = (await actions.getProcessStatus()).data;
+      
+      if (!hasData) {
+        setIsConnected(false);
+        return;
+      }
 
-    console.log("CLIENT [hasData, data]:", [hasData, data]);
-    console.log("PREVIOUS ProcessDATA: ", processData);
-    console.log("ServerHasRef: ", serverHasDataRef.current);
-    
-    if (!hasData || (previousTimestamp && (((new Date().getTime()) - previousTimestamp.getTime())/1000) > 15 )) {
-      serverHasDataRef.current = false;
-      const fakeProcessData: {
-        [_: string]: boolean,
-      } = {};
+      // Update the last successful update timestamp if we got valid data
+      if (data && Object.keys(data).length > 0) {
+        lastSuccessfulUpdateRef.current = Date.now();
+        setIsConnected(true);
+        setProcessData(data);
+      }
 
-      Object.keys(APP_TO_IMAGE_ICON_HASHMAP).forEach(processName => {
-        fakeProcessData[processName] = false;
-      });
-      setProcessData(fakeProcessData);
-      return;
+      // Check if data is stale (no updates in last 20 seconds)
+      const timeSinceLastUpdate = Date.now() - lastSuccessfulUpdateRef.current;
+      if (timeSinceLastUpdate > 20000) {
+        setIsConnected(false);
+      }
+    } catch (error) {
+      console.error("Failed to refresh process status:", error);
+      setIsConnected(false);
     }
-
-    serverHasDataRef.current = true;
-    setProcessData(data);
   }
   
   useEffect(() => {
     refreshProcessStatus();
-    const _interval = setInterval(refreshProcessStatus, 2000);
+    const interval = setInterval(refreshProcessStatus, 2000);
     
     return () => {
-      clearInterval(_interval);
-    }
+      clearInterval(interval);
+    };
   }, []);
 
-  if (!processData) return <span className="text-xs font-serif">Connecting...</span>
+  if (!processData) return <span className="text-xs font-serif">Connecting...</span>;
   
-  return <div className="flex flex-col items-center gap-1">
-    <div className="flex gap-4 ">
-      {
-        Object.keys(APP_TO_IMAGE_ICON_HASHMAP).map(processName => {
-          if (!(processName in processData )) return null;
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div className="flex gap-4">
+        {Object.keys(APP_TO_IMAGE_ICON_HASHMAP).map(processName => {
+          if (!(processName in processData)) return null;
           
-          return <div 
-            className={`
+          return (
+            <div 
+              key={processName}
+              className={`
                 h-8 w-8 
                 ${processData[processName] ? "scale-110" : "scale-100"}
                 transition-all 
               `}
-            style={{
-              filter: `grayscale(${processData[processName] == false ? "1.0": "0.0"})`
-            }}
+              style={{
+                filter: `grayscale(${processData[processName] === false ? "1.0": "0.0"})`
+              }}
             >
-            <img src={`/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt="Icon" />
-          </div>
-        })
-      }
+              <img src={`/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt={`${processName} icon`} />
+            </div>
+          );
+        })}
+      </div>
+      <span className="text-xs italic text-gray-600 font-serif">
+        {isConnected 
+          ? `I am ${Object.values(processData).filter(value => value === true).length > 0 ? "cooking" : "online"}.`
+          : "I am AFK right now."
+        }
+      </span>
     </div>
-    <span className="text-xs italic text-gray-600 font-serif">
-      { 
-        serverHasDataRef.current ? `I am ${Object.values(processData).filter(value => value === true).length > 0 ? "cooking" : "online"}.` : "I am AFK right now."
-      }
-    </span>
-  </div>;
+  );
 }
 
 export default CurrentlyRunningApplication;
