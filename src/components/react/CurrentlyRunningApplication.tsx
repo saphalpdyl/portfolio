@@ -66,7 +66,7 @@ function CurrentlyRunningApplication() {
               filter: `grayscale(${processData[processName] == false ? "1.0": "0.0"})`
             }}
             >
-            <img src={`/public/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt="Icon" />
+            <img src={`/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt="Icon" />
           </div>
         })
       }
