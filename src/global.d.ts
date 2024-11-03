@@ -17,3 +17,9 @@ declare global
   | { status: "rate_limited" }
   | { status: "offline" }
 )
+
+declare global
+  type ProcessData = {
+    appName: string,
+    isRunning: boolean,
+  }
