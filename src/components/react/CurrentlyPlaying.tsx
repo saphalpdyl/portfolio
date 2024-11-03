@@ -70,7 +70,6 @@ function CurrentlyPlaying({
   
   if ( playing && playing.status === "playing" ) {
     const originalName = playing.data.item.name;
-    console.log(playing.data.item.explicit)
     const parsedName = playing.data.item.explicit ? originalName.replace(/[^ ]/g, '*') : originalName;
     
     return (
