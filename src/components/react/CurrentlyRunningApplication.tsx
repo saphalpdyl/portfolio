@@ -22,7 +22,7 @@ function CurrentlyRunningApplication() {
   async function refreshProcessStatus() {
     try {
       // @ts-ignore
-      const [hasData, data, previousTimestamp] = (await actions.getProcessStatus()).data;
+      const [hasData, data] = (await actions.getProcessStatus()).data;
       
       if (!hasData) {
         setIsConnected(false);
