@@ -1,5 +1,5 @@
 import { actions } from "astro:actions";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const APP_TO_IMAGE_ICON_HASHMAP: {
   [_: string]: string,
@@ -16,13 +16,26 @@ function CurrentlyRunningApplication() {
   const [processData, setProcessData] = useState<{
     [_: string]: boolean,
   } | null>(null);
+  const serverHasDataRef = useRef(false);
   
   async function refreshProcessStatus() {
     // @ts-ignore
     const [hasData, data] = (await actions.getProcessStatus()).data;
 
-    if (!hasData) return null;
+    if (!hasData) {
+      serverHasDataRef.current = false;
+      const fakeProcessData: {
+        [_: string]: boolean,
+      } = {};
 
+      Object.keys(APP_TO_IMAGE_ICON_HASHMAP).forEach(processName => {
+        fakeProcessData[processName] = false;
+      });
+      setProcessData(fakeProcessData);
+      return;
+    }
+
+    serverHasDataRef.current = true;
     setProcessData(data);
   }
   
@@ -35,27 +48,34 @@ function CurrentlyRunningApplication() {
     }
   }, []);
 
-  if (!processData) return <span className="text-xs font-serif">Saphal is not connected.</span>
+  if (!processData) return <span className="text-xs font-serif">Connecting...</span>
   
-  return <div className="flex gap-4 ">
-    {
-      Object.keys(processData).map(processName => {
-        if (!(processName in APP_TO_IMAGE_ICON_HASHMAP )) return null;
-        
-        return <div 
-          className={`
-              h-8 w-8 
-              ${processData[processName] ? "scale-110" : "scale-100"}
-              transition-all 
-            `}
-          style={{
-            filter: `grayscale(${processData[processName] == false ? "1.0": "0.0"})`
-          }}
-          >
-          <img src={`/public/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt="Icon" />
-        </div>
-      })
-    }
+  return <div className="flex flex-col items-center gap-1">
+    <div className="flex gap-4 ">
+      {
+        Object.keys(processData).map(processName => {
+          if (!(processName in APP_TO_IMAGE_ICON_HASHMAP )) return null;
+          
+          return <div 
+            className={`
+                h-8 w-8 
+                ${processData[processName] ? "scale-110" : "scale-100"}
+                transition-all 
+              `}
+            style={{
+              filter: `grayscale(${processData[processName] == false ? "1.0": "0.0"})`
+            }}
+            >
+            <img src={`/public/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt="Icon" />
+          </div>
+        })
+      }
+    </div>
+    <span className="text-xs italic text-gray-600 font-serif">
+      { 
+        serverHasDataRef.current ? `I am ${Object.values(processData).filter(value => value === true).length > 0 ? "cooking" : "online"}.` : "I am AFK right now."
+      }
+    </span>
   </div>;
 }
 
