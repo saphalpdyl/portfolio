@@ -53,8 +53,8 @@ function CurrentlyRunningApplication() {
   return <div className="flex flex-col items-center gap-1">
     <div className="flex gap-4 ">
       {
-        Object.keys(processData).map(processName => {
-          if (!(processName in APP_TO_IMAGE_ICON_HASHMAP )) return null;
+        Object.keys(APP_TO_IMAGE_ICON_HASHMAP).map(processName => {
+          if (!(processName in processData )) return null;
           
           return <div 
             className={`
