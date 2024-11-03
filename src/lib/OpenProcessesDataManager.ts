@@ -47,6 +47,7 @@ export default class OpenProcessesDataManagerSingleton {
     if ( this.dataExpireInterval ) clearTimeout(this.dataExpireInterval);
 
     this.dataExpireInterval = setTimeout(() => {
+      console.log("Interval is clearning....");
       this.#clearData();
     }, DATA_EXPIRE_MILLIS);
     
