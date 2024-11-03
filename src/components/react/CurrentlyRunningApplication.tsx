@@ -22,6 +22,10 @@ function CurrentlyRunningApplication() {
     // @ts-ignore
     const [hasData, data] = (await actions.getProcessStatus()).data;
 
+    console.log("CLIENT [hasData, data]:", [hasData, data]);
+    console.log("PREVIOUS ProcessDATA: ", processData);
+    console.log("ServerHasRef: ", serverHasDataRef.current);
+    
     if (!hasData) {
       serverHasDataRef.current = false;
       const fakeProcessData: {

@@ -34,6 +34,8 @@ export default class OpenProcessesDataManagerSingleton {
       hmap[process.appName] = process.isRunning;
     }
 
+    console.log("DM: getDataAsHashMap(): ", hmap);
+
     return hmap;
   }
 

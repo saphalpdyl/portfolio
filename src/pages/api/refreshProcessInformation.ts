@@ -14,6 +14,8 @@ export const POST: APIRoute = async ({ request }) => {
   vertificationHmac.end();
   const calculatedHash = vertificationHmac.read().toString("hex");
 
+  console.log(`${calculatedHash} == ${body.hash} ?`)
+  
   if ( calculatedHash !== body.hash ) {
     console.error("ERROR: Couldn't verify hash. The data might have been tampered with.");
     return new Response(JSON.stringify({
@@ -22,6 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     }))
   }
 
+  console.log("SERVER: BODY: ", body);  
   dataManager.setData(body.payload);
   
   return new Response(JSON.stringify({
