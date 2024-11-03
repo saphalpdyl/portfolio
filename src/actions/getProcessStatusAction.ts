@@ -7,6 +7,6 @@ export default defineAction({
 
     console.log("ACTION: ", [manager.hasData(), manager.getDataAsHashMap()])
 
-    return [manager.hasData(), manager.getDataAsHashMap()];
+    return [manager.hasData(), manager.getDataAsHashMap(), manager.getPreviousTimestamp()];
   }
 });

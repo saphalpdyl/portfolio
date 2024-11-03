@@ -20,13 +20,13 @@ function CurrentlyRunningApplication() {
   
   async function refreshProcessStatus() {
     // @ts-ignore
-    const [hasData, data] = (await actions.getProcessStatus()).data;
+    const [hasData, data, previousTimestamp] = (await actions.getProcessStatus()).data;
 
     console.log("CLIENT [hasData, data]:", [hasData, data]);
     console.log("PREVIOUS ProcessDATA: ", processData);
     console.log("ServerHasRef: ", serverHasDataRef.current);
     
-    if (!hasData) {
+    if (!hasData || (previousTimestamp && (((new Date().getTime()) - previousTimestamp.getTime())/1000) > 15 )) {
       serverHasDataRef.current = false;
       const fakeProcessData: {
         [_: string]: boolean,

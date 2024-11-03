@@ -2,12 +2,13 @@ const DATA_EXPIRE_MILLIS = 10000;
 
 export default class OpenProcessesDataManagerSingleton {
   private processesStatus: ProcessData[] | null;
-  private dataExpireInterval?: NodeJS.Timeout;
+  private previousDataTimestamp: Date | null;
 
   static instance: OpenProcessesDataManagerSingleton;
 
   constructor() {
     this.processesStatus = null;
+    this.previousDataTimestamp = null;
     
     if ( !OpenProcessesDataManagerSingleton.instance ) {
       OpenProcessesDataManagerSingleton.instance = this;
@@ -42,15 +43,13 @@ export default class OpenProcessesDataManagerSingleton {
   #clearData() {
     this.processesStatus = null;
   }
+
+  getPreviousTimestamp() {
+    return this.previousDataTimestamp;
+  }
   
   setData(newStatus: ProcessData[]) {
-    if ( this.dataExpireInterval ) clearTimeout(this.dataExpireInterval);
-
-    this.dataExpireInterval = setTimeout(() => {
-      console.log("Interval is clearning....");
-      this.#clearData();
-    }, DATA_EXPIRE_MILLIS);
-    
+    this.previousDataTimestamp = new Date();
     this.processesStatus = newStatus;
   }
 }
