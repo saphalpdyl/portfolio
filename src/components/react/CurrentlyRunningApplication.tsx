@@ -94,9 +94,9 @@ function CurrentlyRunningApplication() {
   if (!processData) return <span className="text-xs font-serif">Connecting...</span>;
   
   return (
-    <div className="flex flex-col border-[1px] bg-gray-100/60 border-gray-100 rounded-lg py-1 px-2">
+    <div className="flex flex-col border-[1px] bg-gray-100/60 shadow-sm border-gray-100 rounded-lg py-1 px-2">
       <div className="flex justify-between items-center">
-      <span className="text-xs font-serif text-gray-600">Applications</span>
+      <span className="text-xs font-serif text-gray-600">Applications Running</span>
       <OnlineStatusChip
         isConnected={isConnected}
         onlineServices={Object.values(processData).filter(value => value === true).length}
