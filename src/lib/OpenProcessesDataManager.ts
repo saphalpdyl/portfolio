@@ -9,9 +9,11 @@ export default class OpenProcessesDataManagerSingleton {
   constructor() {
     this.processesStatus = null;
     this.previousDataTimestamp = null;
-    
+  }
+  
+  static getInstance() {
     if ( !OpenProcessesDataManagerSingleton.instance ) {
-      OpenProcessesDataManagerSingleton.instance = this;
+      OpenProcessesDataManagerSingleton.instance = new OpenProcessesDataManagerSingleton();
     }
 
     return OpenProcessesDataManagerSingleton.instance;
