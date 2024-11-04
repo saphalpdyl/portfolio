@@ -12,11 +12,6 @@ const APP_TO_IMAGE_ICON_HASHMAP: {
   "Chrome": "chrome.svg"
 };
 
-// Constants for timing
-const POLLING_INTERVAL = 2000; // 2 seconds
-const CONNECTION_TIMEOUT = 10000; // 10 seconds
-const STALE_DATA_THRESHOLD = 7000; // 7 seconds - earlier than timeout to prevent flicker
-
 interface OnlineStatusChipProps {
   isConnected: boolean;
   onlineServices: number;
@@ -49,105 +44,67 @@ function CurrentlyRunningApplication() {
   const [processData, setProcessData] = useState<{
     [_: string]: boolean,
   } | null>(null);
-  const [isConnected, setIsConnected] = useState(false);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [isConnected, setIsConnected] = useState(true);
   const lastSuccessfulUpdateRef = useRef<number>(Date.now());
-  const pollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
-  const createEmptyProcessData = () => {
-    const emptyHashMap: { [_: string]: boolean } = {};
-    Object.keys(APP_TO_IMAGE_ICON_HASHMAP).forEach(processName => 
-      emptyHashMap[processName] = false
-    );
-    return emptyHashMap;
-  };
-
-  const checkConnectionStatus = (lastUpdateTime: number) => {
-    const timeSinceLastUpdate = Date.now() - lastUpdateTime;
-    return timeSinceLastUpdate <= STALE_DATA_THRESHOLD;
-  };
-
   async function refreshProcessStatus() {
     try {
-      //@ts-ignore
+      // @ts-ignore
       const [hasData, data, lastUpdateTime] = (await actions.getProcessStatus()).data;
       
-      if (!hasData || !data) {
+      if (!hasData) {
         setIsConnected(false);
-        setProcessData(createEmptyProcessData());
         return;
       }
-
-      const isDataFresh = checkConnectionStatus(lastUpdateTime);
       
-      if (!isDataFresh) {
+      const timeSinceLastUpdate = Date.now() - lastUpdateTime;
+      if (timeSinceLastUpdate > 10000) {
         setIsConnected(false);
-        setProcessData(createEmptyProcessData());
+        const emptyHashMap: {
+          [_: string]: boolean,
+        } = {};
+        Object.keys(APP_TO_IMAGE_ICON_HASHMAP).forEach(processName => emptyHashMap[processName] = false);
+        setProcessData(emptyHashMap);
         return;
       }
 
-      lastSuccessfulUpdateRef.current = Date.now();
-      setIsConnected(true);
-      setProcessData(data);
-      setIsInitialLoad(false);
+      // Update the last successful update timestamp if we got valid data
+      if (hasData && data && Object.keys(data).length > 0) {
+        lastSuccessfulUpdateRef.current = Date.now();
+        setIsConnected(true);
+        setProcessData(data);
+      }
+
+      // Check if data is stale (no updates in last 20 seconds)
     } catch (error) {
       console.error("Failed to refresh process status:", error);
       setIsConnected(false);
-      setProcessData(createEmptyProcessData());
     }
   }
   
   useEffect(() => {
-    // Initial load
     refreshProcessStatus();
-
-    // Set up polling with error handling and cleanup
-    const startPolling = () => {
-      if (pollTimeoutRef.current) {
-        clearTimeout(pollTimeoutRef.current);
-      }
-      
-      pollTimeoutRef.current = setTimeout(async () => {
-        await refreshProcessStatus();
-        startPolling();
-      }, POLLING_INTERVAL);
-    };
-
-    startPolling();
-
-    // Connection status checker
-    const connectionChecker = setInterval(() => {
-      const timeSinceLastUpdate = Date.now() - lastSuccessfulUpdateRef.current;
-      if (timeSinceLastUpdate > CONNECTION_TIMEOUT) {
-        setIsConnected(false);
-        setProcessData(createEmptyProcessData());
-      }
-    }, 1000);
-
+    const interval = setInterval(refreshProcessStatus, 2000);
+    
     return () => {
-      if (pollTimeoutRef.current) {
-        clearTimeout(pollTimeoutRef.current);
-      }
-      clearInterval(connectionChecker);
+      clearInterval(interval);
     };
   }, []);
 
-  if (isInitialLoad) {
-    return <span className="text-xs font-serif">Connecting...</span>;
-  }
-
+  if (!processData) return <span className="text-xs font-serif">Connecting...</span>;
+  
   return (
     <div className="flex flex-col border-[1px] bg-gray-100/60 shadow-sm border-gray-100 rounded-lg py-1 px-2">
       <div className="flex justify-between items-center">
-        <span className="text-xs font-serif text-gray-600">Applications Running</span>
-        <OnlineStatusChip
-          isConnected={isConnected}
-          onlineServices={Object.values(processData || {}).filter(value => value === true).length}
-        />
+      <span className="text-xs font-serif text-gray-600">Applications Running</span>
+      <OnlineStatusChip
+        isConnected={isConnected}
+        onlineServices={Object.values(processData).filter(value => value === true).length}
+      />
       </div>
       <div className="flex gap-4 flex-wrap">
         {Object.keys(APP_TO_IMAGE_ICON_HASHMAP).map(processName => {
-          if (!processData || !(processName in processData)) return null;
+          if (!(processName in processData)) return null;
           
           return (
             <div 
