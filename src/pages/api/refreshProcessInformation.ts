@@ -24,9 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   dataManager.setData(body.payload);
   
-  return new Response(JSON.stringify({
-      status: 200,
-      message: "Data added successfully",
-    })
-  );
+  return new Response(null, {
+    status: 204,
+  });
 }

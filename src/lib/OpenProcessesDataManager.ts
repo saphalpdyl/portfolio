@@ -1,5 +1,3 @@
-const DATA_EXPIRE_MILLIS = 10000;
-
 export default class OpenProcessesDataManagerSingleton {
   private processesStatus: ProcessData[] | null = null;
   private previousDataTimestamp: Date | null = null;
