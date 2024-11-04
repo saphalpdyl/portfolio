@@ -58,7 +58,6 @@ import ResumeURL from "/public/Resume.pdf";
 					<Image slot="spotifyLogo" src={SpotifyLogo} alt="Spotify Logo" />
 				</CurrentlyPlaying>
 			</div>
-			<CurrentlyRunningApplication client:idle />
 
 			<div class="flex flex-col lg:flex-row lg:w-full w-full sm:w-auto gap-10 my-4 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1 flex flex-col gap-2 font-serif">
@@ -118,6 +117,9 @@ import ResumeURL from "/public/Resume.pdf";
 							</p>
 						</div>
 					</div>
+					<hr />
+					<CurrentlyRunningApplication client:idle />
+
 				</div>
 				<div class="flex-1">
 					<SectionTitle logo={School} text="Education" />
