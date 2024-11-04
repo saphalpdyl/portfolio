@@ -1,19 +1,17 @@
 const DATA_EXPIRE_MILLIS = 10000;
 
 export default class OpenProcessesDataManagerSingleton {
-  private processesStatus: ProcessData[] | null;
-  private previousDataTimestamp: Date | null;
+  private processesStatus: ProcessData[] | null = null;
+  private previousDataTimestamp: Date | null = null;
 
   static instance: OpenProcessesDataManagerSingleton;
 
   constructor() {
-    this.processesStatus = null;
-    this.previousDataTimestamp = null;
-  }
-  
-  static getInstance() {
+    
     if ( !OpenProcessesDataManagerSingleton.instance ) {
-      OpenProcessesDataManagerSingleton.instance = new OpenProcessesDataManagerSingleton();
+      this.processesStatus = null;
+      this.previousDataTimestamp = null;
+      OpenProcessesDataManagerSingleton.instance = this;
     }
 
     return OpenProcessesDataManagerSingleton.instance;

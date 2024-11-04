@@ -3,7 +3,7 @@ import OpenProcessesDataManagerSingleton from "../lib/OpenProcessesDataManager";
 
 export default defineAction({
   handler: () => {
-    const manager = OpenProcessesDataManagerSingleton.getInstance();
+    const manager = new OpenProcessesDataManagerSingleton();
 
     return [manager.hasData(), manager.getDataAsHashMap(), manager.getPreviousTimestamp()];
   }
