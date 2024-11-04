@@ -12,6 +12,34 @@ const APP_TO_IMAGE_ICON_HASHMAP: {
   "Chrome": "chrome.svg"
 };
 
+interface OnlineStatusChipProps {
+  isConnected: boolean;
+  onlineServices: number;
+}
+
+function OnlineStatusChip({
+  isConnected,
+  onlineServices,
+}: OnlineStatusChipProps) {
+  return <div className="rounded-full underline py-1 px-2 flex items-center gap-2">
+    <div 
+      className={`
+        w-2 h-2
+        rounded-full
+        ring-1 ring-offset-1
+        animate-pulse
+        ${isConnected ? "bg-green-500 ring-green-600" : "bg-red-500 ring-red-600"}
+      `}
+    ></div>
+    <span className="text-[10px] text-gray-600 font-serif">
+      {isConnected 
+        ? `${onlineServices > 0 ? "Active" : "Online"}`
+        : "Away" 
+      }
+    </span>
+  </div>;
+}
+
 function CurrentlyRunningApplication() {
   const [processData, setProcessData] = useState<{
     [_: string]: boolean,
@@ -22,25 +50,32 @@ function CurrentlyRunningApplication() {
   async function refreshProcessStatus() {
     try {
       // @ts-ignore
-      const [hasData, data] = (await actions.getProcessStatus()).data;
+      const [hasData, data, lastUpdateTime] = (await actions.getProcessStatus()).data;
       
       if (!hasData) {
         setIsConnected(false);
         return;
       }
+      
+      const timeSinceLastUpdate = Date.now() - lastUpdateTime;
+      if (timeSinceLastUpdate > 10000) {
+        setIsConnected(false);
+        const emptyHashMap: {
+          [_: string]: boolean,
+        } = {};
+        Object.keys(APP_TO_IMAGE_ICON_HASHMAP).forEach(processName => emptyHashMap[processName] = false);
+        setProcessData(emptyHashMap);
+        return;
+      }
 
       // Update the last successful update timestamp if we got valid data
-      if (data && Object.keys(data).length > 0) {
+      if (hasData && data && Object.keys(data).length > 0) {
         lastSuccessfulUpdateRef.current = Date.now();
         setIsConnected(true);
         setProcessData(data);
       }
 
       // Check if data is stale (no updates in last 20 seconds)
-      const timeSinceLastUpdate = Date.now() - lastSuccessfulUpdateRef.current;
-      if (timeSinceLastUpdate > 20000) {
-        setIsConnected(false);
-      }
     } catch (error) {
       console.error("Failed to refresh process status:", error);
       setIsConnected(false);
@@ -59,8 +94,15 @@ function CurrentlyRunningApplication() {
   if (!processData) return <span className="text-xs font-serif">Connecting...</span>;
   
   return (
-    <div className="flex flex-col items-center gap-1">
-      <div className="flex gap-4">
+    <div className="flex flex-col border-[1px] bg-gray-100/60 border-gray-100 rounded-lg py-1 px-2">
+      <div className="flex justify-between items-center">
+      <span className="text-xs font-serif text-gray-600">Applications</span>
+      <OnlineStatusChip
+        isConnected={isConnected}
+        onlineServices={Object.values(processData).filter(value => value === true).length}
+      />
+      </div>
+      <div className="flex gap-4 flex-wrap">
         {Object.keys(APP_TO_IMAGE_ICON_HASHMAP).map(processName => {
           if (!(processName in processData)) return null;
           
@@ -69,8 +111,8 @@ function CurrentlyRunningApplication() {
               key={processName}
               className={`
                 h-8 w-8 
-                ${processData[processName] ? "scale-110" : "scale-100"}
-                transition-all 
+                ${processData[processName] ? "scale-110" : "scale-90"}
+                transition-all ease-in-out duration-500
               `}
               style={{
                 filter: `grayscale(${processData[processName] === false ? "1.0": "0.0"})`
@@ -81,12 +123,6 @@ function CurrentlyRunningApplication() {
           );
         })}
       </div>
-      <span className="text-xs italic text-gray-600 font-serif">
-        {isConnected 
-          ? `I am ${Object.values(processData).filter(value => value === true).length > 0 ? "cooking" : "online"}.`
-          : "I am AFK right now."
-        }
-      </span>
     </div>
   );
 }
