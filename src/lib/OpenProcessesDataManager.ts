@@ -15,6 +15,7 @@ export default class OpenProcessesDataManagerSingleton {
   }
 
   hasData() {
+    console.log("HAS DATA: ", this.processesStatus);
     return this.processesStatus !== null;
   }
 
@@ -44,6 +45,7 @@ export default class OpenProcessesDataManagerSingleton {
   }
   
   setData(newStatus: ProcessData[]) {
+    console.log("DATA CHANGE: ", newStatus);
     this.previousDataTimestamp = new Date();
     this.processesStatus = newStatus;
   }
