@@ -4,14 +4,13 @@ export default class OpenProcessesDataManagerSingleton {
 
   static instance: OpenProcessesDataManagerSingleton;
 
-  constructor() {
-    
+  private constructor() {}
+  
+  static getInstance() {
     if ( !OpenProcessesDataManagerSingleton.instance ) {
-      this.processesStatus = null;
-      this.previousDataTimestamp = null;
-      OpenProcessesDataManagerSingleton.instance = this;
+      OpenProcessesDataManagerSingleton.instance = new OpenProcessesDataManagerSingleton();
     }
-
+  
     return OpenProcessesDataManagerSingleton.instance;
   }
 

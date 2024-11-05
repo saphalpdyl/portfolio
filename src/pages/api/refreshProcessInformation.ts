@@ -4,7 +4,7 @@ import type { APIRoute } from "astro";
 import OpenProcessesDataManagerSingleton from "../../lib/OpenProcessesDataManager";
 
 export const POST: APIRoute = async ({ request }) => {
-  const dataManager = new OpenProcessesDataManagerSingleton();
+  const dataManager = OpenProcessesDataManagerSingleton.getInstance();
   
   const body = await request.json();
 
