@@ -1,5 +1,6 @@
 import { actions } from "astro:actions";
 import { useEffect, useState } from "react";
+import { isDateToday } from "../../lib/utils";
 
 const DATE_FORMAT_OPTIONS = { hour: '2-digit', minute: '2-digit' } satisfies Intl.DateTimeFormatOptions;
 
@@ -73,14 +74,27 @@ function BusyStatusIndicator() {
     return <Chip 
       type="busy" 
       text="Saphal is currently busy" 
-      note={status.freeAt != null ? `Will be free on ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
-      />
-    }
+      note={status.freeAt != null ? `Will be free on ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : "the future"}
+    />
+  }
     
-    return <Chip 
+  console.log(status?.busyAt)
+  let busyText = "Will be busy in the future"
+  if ( status?.busyAt ) {
+    if ( !isDateToday(status.busyAt) ) {
+      busyText = "Saphal is free for today"
+    } else {
+      busyText = `Will be busy on ${status?.busyAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}`;
+    }
+  } 
+    
+  return <Chip 
     type="free" 
     text="Saphal is currently free" 
-    note={status?.busyAt != null ? `Will be busy on ${status?.busyAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : ""}
+
+    // If I will be busy tommorow mention it 
+    // No need to mention for free ( doesn't make sense )
+    note={busyText}
   />
 }
 
