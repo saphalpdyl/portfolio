@@ -70,15 +70,27 @@ function BusyStatusIndicator() {
     return <Chip type="loading" text="Searching calendar for events" />
   }
   
+  
   if ( status && status.status == "busy" ) {
+    let freeText = "Will be free in the future"
+
+    if ( status.freeAt ) {
+      if ( !isDateToday(status.freeAt) ) {
+        // Won't be free for today
+        freeText = "Saphal is really busy today"
+      } else {
+        freeText = `Will be free on ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}`
+      }
+    }
+    
+    
     return <Chip 
       type="busy" 
       text="Saphal is currently busy" 
-      note={status.freeAt != null ? `Will be free on ${status.freeAt?.toLocaleTimeString('en-US', DATE_FORMAT_OPTIONS)}` : "the future"}
+      note={freeText}
     />
   }
     
-  console.log(status?.busyAt)
   let busyText = "Will be busy in the future"
   if ( status?.busyAt ) {
     if ( !isDateToday(status.busyAt) ) {
