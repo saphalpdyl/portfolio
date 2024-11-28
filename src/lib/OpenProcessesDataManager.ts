@@ -36,10 +36,6 @@ export default class OpenProcessesDataManagerSingleton {
     return hmap;
   }
 
-  #clearData() {
-    this.processesStatus = null;
-  }
-
   getPreviousTimestamp() {
     return this.previousDataTimestamp;
   }
