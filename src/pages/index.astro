@@ -43,7 +43,7 @@ import ResumeURL from "/public/Resume.pdf";
 		</style>
 	</head>
 	<body>
-		<div id="root" class="flex flex-col gap-2 h-screen w-screen items-center p-10">
+		<div id="root" class="flex flex-col gap-2 w-screen items-center p-10">
 			<DevelopmentBanner />
 			<BackgroundGrid client:visible />
 			
@@ -123,7 +123,7 @@ import ResumeURL from "/public/Resume.pdf";
 				</div>
 				<div class="flex-1">
 					<SectionTitle logo={School} text="Education" />
-					<div class="lg:divide-y-2 flex flex-col sm:flex-row lg:flex-col gap-4">
+					<div class="lg:divide-y-2 flex flex-col sm:flex-row sm:justify-between lg:flex-col gap-4">
 						<EducationItem 
 							education="Bachelor's in Computer Science"
 							date="2024 Aug - Present"
@@ -140,7 +140,7 @@ import ResumeURL from "/public/Resume.pdf";
 				</div>
 			</div>
 			
-			<div class="flex lg:flex-row flex-col lg:w-full gap-10 lg:max-w-[70%] max-w-[100%]">
+			<div class="flex lg:flex-row flex-col lg:w-full w-full gap-10 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1">
 					<TopProjects client:idle>
 						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
