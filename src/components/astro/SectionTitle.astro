@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 
 interface Props {
-  logo: ImageMetadata;
+  logo?: ImageMetadata;
   text: string;
 }
 
@@ -10,8 +10,10 @@ const { logo, text } = Astro.props;
 ---
 
 <span class="flex gap-2 font-serif font-semibold text-lg underline">
-  <div class="w-6 h-6">
-    <Image src={logo} alt="App Window logo"/>
-  </div>
+  {
+    logo && <div class="w-6 h-6">
+        <Image src={logo} alt="App Window logo"/>
+    </div>
+  }
   { text }
 </span>
