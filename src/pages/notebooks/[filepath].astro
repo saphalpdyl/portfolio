@@ -5,7 +5,7 @@ let notFound = true;
 let notebookTitle = "";
 let notebookHTML = "";
 
-const metadataResponse = await fetch(`https://api.github.com/repos/saphalpdyl/${import.meta.env.VITE_NOTEBOOK_REPOSITORY}/contents/metadata.json`, {
+const metadataResponse = await fetch(`https://api.github.com/repos/saphalpdyl/${import.meta.env.PUBLIC_NOTEBOOK_REPOSITORY}/contents/metadata.json`, {
   headers: {
     "Accept": "application/vnd.github.v3.raw", // To get raw data instead of base64 encoded data
     "Authorization": `Bearer ${import.meta.env.GITHUB_API_KEY}`,
@@ -41,20 +41,38 @@ if (notebookResponse.status < 300) {
 
 ---
 
-<div>
-{
-  notFound ? (
-    <div class="h-screen w-screen flex flex-col justify-center items-center gap-2">
-      <span class="text-4xl font-bold">404. Not Found.</span>
-      <span class="text-xs text-gray-500">
-        No Notebooks to be found here.
-        <a href="/" aria-label="Go back" class="underline cursor-pointer">Go back</a>
-      </span>
-    </div>
-  ) : (
-    <span class="text-3xl font-bold ">{ notebookTitle }</span>
-    <Fragment set:html={notebookHTML} />
-  )
-}
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body class="p-0">
+    <div>
+    {
+      notFound ? (
+        <div class="h-screen w-screen flex flex-col justify-center items-center gap-2">
+          <span class="text-4xl font-bold">404. Not Found.</span>
+          <span class="text-xs text-gray-500">
+            No Notebooks to be found here.
+            <a href="/" aria-label="Go back" class="underline cursor-pointer">Go back</a>
+          </span>
+        </div>
+      ) : (
+        <a href="/" class="fixed text-white hover:text-white font-bold h-12 w-20 opacity-80 hover:opacity-100 cursor-pointer bg-slate-900 rounded-r-md top-1/2 -translate-y-1/2 -left-2 flex justify-center items-center z-[40]">
+          Go back
+        </a>
+        <div class="fixed bg-white/50 w-full backdrop-blur-sm">
+          <div class="pl-16">
+            <span class="text-3xl font-bold">{ notebookTitle }</span>
+            <p class="font-serif">Created by Saphal K. Poudyal</p>
+          </div>
+          <hr class="mt-2">
+        </div>
 
-</div>
+        <div class="h-20"></div>
+        <Fragment set:html={notebookHTML} />
+      )
+    }
+
+    </div>
+  </body>
+</html>

@@ -6,6 +6,7 @@ type Props = {}
 
 type Notebook = {
   title: string,
+  filepath: string,
 }
 
 // Get the metadata.json first
@@ -16,7 +17,7 @@ export default function KaggleNotebooks({}: Props) {
 
   const _fetchNotebooksMetadata = async () => {
     const response = await actions.getKaggleNotebooksMetadata({
-      repository: "kaggle_notebooks",
+      repository: import.meta.env.PUBLIC_NOTEBOOK_REPOSITORY,
     });
 
     const {
@@ -35,6 +36,7 @@ export default function KaggleNotebooks({}: Props) {
     setNotebooks(
       notebookGroup!.files.map(notebook => ({
         title: notebook.metadata["title"],
+        filepath: notebook.filepath,
       } as Notebook))
     )
     setLoading(false);
@@ -60,7 +62,11 @@ export default function KaggleNotebooks({}: Props) {
     {
       notebooks!.map(notebook => (
         <div className="px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1">
-          <a href="#" target="_blank" aria-label={notebook.title} className="text-blue-500 underline cursor-pointer">
+          <a 
+            href={`/notebooks/${notebook.filepath}`}
+            aria-label={notebook.title} 
+            className="text-blue-500 underline cursor-pointer"
+            >
             { notebook.title }
           </a>  
           <span className="text-gray-500 text-[11px] font-mono">Group: Kaggle Notebooks</span>
