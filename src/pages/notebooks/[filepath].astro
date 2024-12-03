@@ -1,0 +1,60 @@
+---
+const { filepath } = Astro.params;
+
+let notFound = true;
+let notebookTitle = "";
+let notebookHTML = "";
+
+const metadataResponse = await fetch(`https://api.github.com/repos/saphalpdyl/${import.meta.env.VITE_NOTEBOOK_REPOSITORY}/contents/metadata.json`, {
+  headers: {
+    "Accept": "application/vnd.github.v3.raw", // To get raw data instead of base64 encoded data
+    "Authorization": `Bearer ${import.meta.env.GITHUB_API_KEY}`,
+  },
+});
+
+const metadata: NotebookMetadata = await metadataResponse.json()
+
+if (metadata && metadata.data) {
+  // HARD CODED `KAGGLE` FOR NOW
+  const kaggleGroup = metadata.data.find(group => group.group === "kaggle");
+  if (kaggleGroup) {
+    const thisNotebook = kaggleGroup.files?.find(file => file.filepath === filepath)
+
+
+    if (thisNotebook)
+      notebookTitle = thisNotebook.metadata["title"]
+  }
+
+}
+
+const notebookResponse = await fetch(`https://api.github.com/repos/saphalpdyl/kaggle_notebooks/contents/${filepath}`, {
+  headers: {
+    "Accept": "application/vnd.github.v3.raw",
+    "Authorization": `Bearer ${import.meta.env.GITHUB_API_KEY}`,
+  }
+});
+
+if (notebookResponse.status < 300) {
+  notebookHTML = await notebookResponse.text()
+  notFound = false;
+}
+
+---
+
+<div>
+{
+  notFound ? (
+    <div class="h-screen w-screen flex flex-col justify-center items-center gap-2">
+      <span class="text-4xl font-bold">404. Not Found.</span>
+      <span class="text-xs text-gray-500">
+        No Notebooks to be found here.
+        <a href="/" aria-label="Go back" class="underline cursor-pointer">Go back</a>
+      </span>
+    </div>
+  ) : (
+    <span class="text-3xl font-bold ">{ notebookTitle }</span>
+    <Fragment set:html={notebookHTML} />
+  )
+}
+
+</div>
