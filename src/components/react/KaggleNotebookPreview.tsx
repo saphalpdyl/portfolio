@@ -37,6 +37,7 @@ export default function KaggleNotebookPreview({
         overflow-x-hidden
         ${htmlContent ? "h-96" : "h-24"} 
         p-4 rounded-xl bg-white/90
+        border-2 shadow-md
     `}>
       {
         htmlContent && <div className='absolute w-full h-12 z-[40] bg-white/80 flex justify-center'>
