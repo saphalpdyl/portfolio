@@ -4,6 +4,7 @@ import getProcessStatusAction from "./getProcessStatusAction"
 import getSpotifyCurrentlyPlayingAction from "./getSpotifyCurrentlyPlayingAction"
 import getTopLanguagesAction from "./getTopLanguagesAction"
 import getTopRepositoriesAction from "./getTopRepositoriesAction"
+import getKaggleNotebooksHTMLDataAction from "./getKaggleNotebooksHTMLData"
 
 export const server = {
   getTopLanguages: getTopLanguagesAction,
@@ -12,4 +13,5 @@ export const server = {
   getSpotifyCurrentlyPlaying: getSpotifyCurrentlyPlayingAction,
   getProcessStatus: getProcessStatusAction,
   getKaggleNotebooksMetadata: getKaggleNotebooksMetadataAction,
+  getKaggleNotebooksHTMLData: getKaggleNotebooksHTMLDataAction,
 }

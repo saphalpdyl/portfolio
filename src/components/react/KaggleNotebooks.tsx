@@ -1,12 +1,14 @@
 import { actions } from "astro:actions"
 import { useEffect, useState } from "react";
 import Skeleton from "./common/Skeleton";
+import KaggleNotebookPreview from "./KaggleNotebookPreview";
 
 type Props = {}
 
 type Notebook = {
   title: string,
   filepath: string,
+  htmlContent?: string,
 }
 
 // Get the metadata.json first
@@ -41,6 +43,22 @@ export default function KaggleNotebooks({}: Props) {
     )
     setLoading(false);
   }
+  
+  const fetchNotebookHTMLData = async (notebookFilePath: string) => {
+    const thisNotebook = notebooks?.find(nb => nb.filepath === notebookFilePath);
+
+    if (thisNotebook?.htmlContent) return;
+
+    const { data } = await actions.getKaggleNotebooksHTMLData({
+      filepath: notebookFilePath,
+    });
+
+    setNotebooks(notebooks!.map(nb => 
+      nb.filepath === notebookFilePath 
+        ? { ...nb, htmlContent: data }
+        : nb
+    ));
+  }
 
   useEffect(() => {
     _fetchNotebooksMetadata();
@@ -55,13 +73,18 @@ export default function KaggleNotebooks({}: Props) {
     </div>
   }
 
-  return <div className={`
+  return <div 
+    className={`
       flex flex-col gap-2 my-2
       ${notebooks!.length > 4 ? "overflow-y-scroll h-60" : ""}
     `}>
     {
       notebooks!.map(notebook => (
-        <div className="px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1">
+        <div 
+          onMouseEnter={() => fetchNotebookHTMLData(notebook.filepath)}
+          className="relative group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
+        >
+          <KaggleNotebookPreview htmlContent={notebook.htmlContent} />
           <a 
             href={`/notebooks/${notebook.filepath}`}
             aria-label={notebook.title} 
