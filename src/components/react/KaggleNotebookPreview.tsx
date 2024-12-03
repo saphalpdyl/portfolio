@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useRef } from 'react';
 import Skeleton from './common/Skeleton';
 
 type Props = {
@@ -10,6 +10,23 @@ export default function KaggleNotebookPreview({
   htmlContent,
   title
 }: Props) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const iframeParent = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (htmlContent && iframeRef.current) {
+      const iframe = iframeRef.current;
+      const doc = iframe.contentDocument || iframe.contentWindow?.document;
+      
+      if (doc && iframeParent.current) {
+        // Write the content to iframe
+        doc.open();
+        doc.write(htmlContent);
+        doc.close();
+      }
+    }
+  }, [htmlContent]);
+  
   return (
     <div className={`
         transition-all delay-200 group-hover:opacity-100 opacity-0 left-20 bottom-10 group-hover:pointer-events-auto pointer-events-none 
@@ -29,16 +46,14 @@ export default function KaggleNotebookPreview({
       {
         !htmlContent ? <Skeleton className='w-full h-full flex justify-center items-center font-mono' >Loading preview...</Skeleton> 
         : <div 
-            className='scale-75'
+            className='h-full w-full'
+            ref={iframeParent}
           >
-            <div 
-            className='absolute'
-              dangerouslySetInnerHTML={{
-                __html: htmlContent,
-              }}
-            >
-
-            </div>
+            <iframe
+              ref={iframeRef}
+              className="w-full border-none h-full"
+              title={title}
+            />
         </div>
       }
     </div>
