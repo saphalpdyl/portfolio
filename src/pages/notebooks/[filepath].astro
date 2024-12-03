@@ -15,8 +15,7 @@ const metadataResponse = await fetch(`https://api.github.com/repos/saphalpdyl/${
 const metadata: NotebookMetadata = await metadataResponse.json()
 
 if (metadata && metadata.data) {
-  // HARD CODED `KAGGLE` FOR NOW
-  const kaggleGroup = metadata.data.find(group => group.group === "kaggle");
+  const kaggleGroup = metadata.data.find(group => group.group === import.meta.env.PUBLIC_NOTEBOOK_GCMS_GROUP);
   if (kaggleGroup) {
     const thisNotebook = kaggleGroup.files?.find(file => file.filepath === filepath)
 

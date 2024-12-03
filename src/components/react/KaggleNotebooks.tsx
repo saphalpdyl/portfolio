@@ -31,7 +31,7 @@ export default function KaggleNotebooks({}: Props) {
 
     const metadata = data as NotebookMetadata
 
-    const notebookGroup = metadata.data.find(group => group.group == "kaggle");
+    const notebookGroup = metadata.data.find(group => group.group == import.meta.env.PUBLIC_NOTEBOOK_GCMS_GROUP);
   
     setNotebooks(
       notebookGroup!.files.map(notebook => ({
