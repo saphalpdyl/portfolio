@@ -67,11 +67,71 @@ if (notebookResponse.status < 300) {
           <hr class="mt-2">
         </div>
 
+        <div>
+          <div id="table-of-contents" class="max-h-[50rem] w-48 lg:w-60 fixed px-5 bg-black/60 top-1/2 -translate-y-1/2 right-0 backdrop-blur-sm rounded-lg"></div>
+        </div>
+
         <div class="h-20"></div>
         <Fragment set:html={notebookHTML} />
       )
     }
 
     </div>
+
+    <script>
+      function generateTableOfContents() {
+          // Get the container
+          const toc = document.getElementById('table-of-contents');
+          
+          // Get all H1 and H2 elements
+          const headings = document.querySelectorAll('h1, h2');
+          
+          headings.forEach(heading => {
+              // Create an id for the heading if it doesn't have one
+              if (!heading.id) {
+                  heading.id = heading.textContent!
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]+/g, '-');
+              }
+              
+              const link = document.createElement('a');
+              link.href = `#${heading.id}`;
+              link.textContent = heading.textContent;
+              
+              // Style based on heading level
+              if (heading.tagName === 'H1') {
+                  link.className = 'block py-2 text-gray-300 hover:text-white transition-colors duration-200 font-bold';
+              } else {
+                  link.className = 'block py-2 pl-4 text-gray-400 hover:text-white transition-colors duration-200 text-xs';
+              }
+              
+              // Add smooth scroll behavior
+              link.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  document.getElementById(heading.id)!.scrollIntoView({
+                      behavior: 'smooth'
+                  });
+              });
+              
+              toc!.appendChild(link);
+          });
+          
+          // Optional: Add active state for current section
+          window.addEventListener('scroll', () => {
+              headings.forEach(heading => {
+                  const link = toc!.querySelector(`a[href="#${heading.id}"]`);
+                  const section = heading.getBoundingClientRect();
+                  
+                  if (section.top <= 100 && section.bottom >= 100) {
+                      link!.classList.add('text-white', 'font-medium');
+                  } else {
+                      link!.classList.remove('text-white', 'font-medium');
+                  }
+              });
+          });
+      }
+
+      document.addEventListener('DOMContentLoaded', generateTableOfContents);
+    </script>
   </body>
 </html>
