@@ -1,5 +1,4 @@
 ---
-import BackgroundGrid from "../components/react/BackgroundGrid"
 import TopLanguages from "../components/react/TopLanguages";
 import TopProjects from "../components/react/TopProjects";
 import BusyStatusIndicator from "../components/react/BusyStatusIndicator";
@@ -28,6 +27,7 @@ import KaggleLogo from "../assets/icons/kaggle_logo.png";
 
 import ResumeURL from "/public/Resume.pdf";
 import KaggleNotebooks from "../components/react/KaggleNotebooks";
+import BackgroundWeb from "../components/react/BackgroundWeb";
 ---
 
 <html lang="en">
@@ -45,9 +45,9 @@ import KaggleNotebooks from "../components/react/KaggleNotebooks";
 		</style>
 	</head>
 	<body>
+		<BackgroundWeb radius={120} numPoints={300} client:idle />
 		<div id="root" class="flex flex-col gap-2 w-screen items-center p-10">
 			<DevelopmentBanner />
-			<BackgroundGrid client:visible />
 			
 			<span class="text-5xl font-serif font-semibold">Saphal K. Poudyal</span>
 			<div class="font-[100] italic font-serif">
