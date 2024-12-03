@@ -84,7 +84,7 @@ export default function KaggleNotebooks({}: Props) {
           onMouseEnter={() => fetchNotebookHTMLData(notebook.filepath)}
           className="relative group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
         >
-          <KaggleNotebookPreview htmlContent={notebook.htmlContent} />
+          <KaggleNotebookPreview htmlContent={notebook.htmlContent} title={notebook.title}/>
           <a 
             href={`/notebooks/${notebook.filepath}`}
             aria-label={notebook.title} 
