@@ -1,4 +1,5 @@
 import getBusyStatusAction from "./getBusyStatusAction"
+import getKaggleNotebooksMetadataAction from "./getKaggleNotebooksMetadataAction"
 import getProcessStatusAction from "./getProcessStatusAction"
 import getSpotifyCurrentlyPlayingAction from "./getSpotifyCurrentlyPlayingAction"
 import getTopLanguagesAction from "./getTopLanguagesAction"
@@ -10,4 +11,5 @@ export const server = {
   getBusyStatus: getBusyStatusAction,
   getSpotifyCurrentlyPlaying: getSpotifyCurrentlyPlayingAction,
   getProcessStatus: getProcessStatusAction,
+  getKaggleNotebooksMetadata: getKaggleNotebooksMetadataAction,
 }
