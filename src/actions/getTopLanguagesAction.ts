@@ -1,5 +1,7 @@
 import { defineAction } from "astro:actions";
 
+const IGNORE_REPOSITORIES = (import.meta.env.IGNORE_REPOSITORIES_IN_TOP_LANGUAGES || "").split(",")
+
 interface TopLanguagesResponse {
   data: {
     user: {
@@ -73,6 +75,8 @@ export default defineAction({
   
       // Iterate through all repositories
       for (const repo of data.data.user.repositories.nodes) {
+        if (IGNORE_REPOSITORIES.includes(repo.name)) continue;
+        
         // Iterate through all languages in each repository
         for (const { size, node } of repo.languages.edges) {
           // Update the usage for each language

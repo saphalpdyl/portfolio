@@ -6,7 +6,7 @@ import Skeleton from "./common/Skeleton";
 
 const PROGRESS_BAR_TOTAL_LENGTH = 20;
 const PROGRESS_BAR_SMALL_TOTAL_LENGTH = 10;
-const TOP_LANGUAGES = 6;
+const TOP_LANGUAGES = 7;
 
 function ProgressBar({ percentage, color, progressBarLength } : {
   percentage: number,
@@ -38,7 +38,7 @@ function TopLanguages({ githubLogo }: {
 
   async function _refreshLanguages() {
     const data = await actions.getTopLanguages({
-      top: 5,
+      top: 7,
     });
     if (data == undefined)
       throw new Error("Data is undefined");
@@ -79,7 +79,7 @@ function TopLanguages({ githubLogo }: {
         <div className="w-6 h-6">
           { githubLogo }
         </div>
-        Most Used Languages on GitHub 
+        Recently Used Languages on GitHub 
       </div>
       <div className="grid grid-cols-2 font-serif">
         {
