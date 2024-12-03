@@ -23,3 +23,24 @@ declare global
     appName: string,
     isRunning: boolean,
   }
+
+// Kaggle Notebooks
+declare global
+  type NotebookMetadataFile = {
+    filepath: string,
+    metadata: {
+      [key: string]: stirng
+    }
+  }
+
+declare global 
+  type NotebookMetadataGroup = {
+    group: string,
+    files: NotebookMetadataFile[],
+}
+
+declare global
+  type NotebookMetadata = {
+    last_updated: number,
+    data: NotebookMetadataGroup[],
+  }
