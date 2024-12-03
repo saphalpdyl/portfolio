@@ -87,7 +87,7 @@ export default function KaggleNotebooks({}: Props) {
       notebooks!.map(notebook => (
         <div 
           onMouseEnter={() => fetchNotebookHTMLData(notebook.filepath)}
-          className="group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
+          className="relative group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
         >
           <KaggleNotebookPreview htmlContent={notebook.htmlContent} title={notebook.title}/>
           <a 
