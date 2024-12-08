@@ -1,0 +1,35 @@
+---
+// ExperienceItem.astro
+interface Props {
+  title: string;
+  company: string;
+  dateFrom: string;
+  dateTo: string;
+  experiences: string[];
+}
+
+const { title, company, dateFrom, dateTo, experiences } = Astro.props;
+---
+
+<div class="mb-2 relative">
+  <div class="absolute -translate-x-[.95rem] top-2 w-2 h-2 bg-blue-300 rounded-full"></div>
+  <div>
+    <div class="flex justify-between items-baseline">
+      <h3 class="text-md font-bold">{title}</h3>
+      <span class="underline text-xs font-bold">{dateFrom} - {dateTo}</span>
+    </div>
+    <div class="text-sm -mt-1">
+      <em class="text-gray-500 italic">{company}</em>
+    </div>
+    <ul class="list-none pl-2 m-0 text-[0.76rem] space-y-1 mt-2">
+      {
+        experiences.map(ex => (
+          <p>
+            - {ex}
+          </p>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+

@@ -4,6 +4,8 @@ import TopProjects from "../components/react/TopProjects";
 import BusyStatusIndicator from "../components/react/BusyStatusIndicator";
 import CurrentlyPlaying from "../components/react/CurrentlyPlaying";
 import CurrentlyRunningApplication from "../components/react/CurrentlyRunningApplication";
+import Experience from "../components/astro/Experience.astro";
+import ExperienceItem from "../components/astro/ExperienceItem.astro";
 
 import EducationItem from "../components/astro/EducationItem.astro";
 import DevelopmentBanner from "../components/astro/DevelopmentBanner.astro";
@@ -24,6 +26,7 @@ import Phone from "../assets/icons/phone.svg";
 import Eye from "../assets/icons/eye.svg";
 import FileDown from "../assets/icons/file-down.svg";
 import KaggleLogo from "../assets/icons/kaggle_logo.png";
+import KeyboardLogo from "../assets/icons/keyboard.svg";
 
 import ResumeURL from "/public/Resume.pdf";
 import KaggleNotebooks from "../components/react/KaggleNotebooks";
@@ -44,7 +47,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 			}
 		</style>
 	</head>
-	<body>
+	<body class="overflow-x-hidden">
 		<BackgroundWeb radius={120} numPoints={300} client:idle />
 		<div id="root" class="flex flex-col gap-2 w-screen items-center p-10">
 			<DevelopmentBanner />
@@ -141,8 +144,84 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 					</div>
 				</div>
 			</div>
-			
 			<div class="flex lg:flex-row flex-col lg:w-full w-full gap-10 lg:max-w-[70%] max-w-[100%]">
+				<div class="w-full flex flex-col items-start flex-1">
+					<SectionTitle logo={KeyboardLogo} text="Experience" />
+					<p class="text-xs font-serif mb-2">These are my professional experiences through different roles in the industry from the newest to oldest.</p>
+					<Experience>
+						<ExperienceItem
+							title="Undergraduate Research Assistant"
+							company="The University of Southern Mississippi Construction and Design"
+							dateFrom="Nov 2024"
+							dateTo="Present"
+							experiences={[
+								"Developing a research-based interactive gaming environment in Unity Engine using tools such as Blender, Adobe Substance Painter, Materialize and so on.",
+								"Reviewing and filtering to provide quality data for research purposes.",
+								"Created an AI-powered automated dev-log workflow between myself and supervisors in Google workspaces with Google Apps Script(GAS) reducing time required on reviewing by 17% (~7 minutes).",
+
+							]}
+						/>
+						<ExperienceItem
+							title="Independent Flutter Developer"
+							company="BTech Ltd."
+							dateFrom="May 2024"
+							dateTo="Aug 2024"
+							experiences={[
+								"Developed a Flutter based ERP(Entity Resource Planning) system following Clean Architecture and SOLID principles for efficient, scalable, and domain-oriented code.",
+								"Implemented journal entries, journal ledgers, inventory management, billing and multiple different financial reports.",
+								"Managed project timelines and deliverables to ensure on-time completion and high-quality results completing project 11 days earlier than the deadline.",
+								"Collaborated with the client to gather requirements, provide regular updates, and incorporate feedback into the application."
+							]}
+						/>
+
+						<ExperienceItem
+							title="Secondary Django Instructor"
+							company="Sipalaya Infotech Pvt. Ltd."
+							dateFrom="Oct 2024"
+							dateTo="July 2024"
+							experiences={[
+								"Successfully delivered Django programming course for 3 batches of students, with 9 students managing to land an internship within a month of course completion.",
+								"Developed and presented course materials, leveraging rapid mastery of programming concepts to effectively educate students."
+							]}
+						/>
+
+						<ExperienceItem
+							title="Full-stack Python Developer Intern"
+							company="Sipalaya Infotech Pvt. Ltd."
+							dateFrom="Oct 2024"
+							dateTo="Apr 2024"
+							experiences={[
+								"Developed, end-to-end, the CRM service for the Internet service company Beni communications’s administrator web application using Django with PostgreSQL and React.js with Redux and Zustand along with Postman for testing APIs.",
+								"Contributed in translation of PHP-based REST APIs into scalable Django implementations.",
+								"Reformed the previous billing system with keyboard shortcuts and macros increasing user experience by 30%.",
+								"Re-documented 99% of the views and service functions using PyDoc learning test driven development(TDD).",
+								"Maintained Continuous Integration (CI) through GitHub Actions and Django Tests and communication through Jira.",
+
+							]}
+						/>
+					</Experience>
+				</div>
+				<div class="flex-1 flex flex-col gap-5">
+					<TopProjects client:idle>
+						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
+					</TopProjects>
+					<div>
+						<div class="flex items-center justify-start w-full gap-2">
+							<Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/>
+							<SectionTitle text="Notebooks" />
+						</div>
+						<p class="text-xs font-serif">
+							&nbsp; I also have great passion in Exploratory Data Analysis and Kaggle competitions. Below is the collection of my latest notebooks on Kaggle.
+						</p>
+						<KaggleNotebooks client:idle/>
+						<a href="https://www.github.com/saphalpdyl/gcms" target="_blank" class="text-[11px] font-serif font-thing italic text-gray-600">
+							Powered by <span class="underline">GCMS</span>, saphalpdyl
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- <div class="flex lg:flex-row flex-col lg:w-full w-full gap-10 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1">
 					<TopProjects client:idle>
 						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
@@ -161,7 +240,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 						Powered by GCMS, saphalpdyl
 					</a>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="flex lg:flex-row flex-col lg:w-full w-full gap-10 lg:max-w-[70%] max-w-[100%] my-3">
 				<div class="flex-1">
