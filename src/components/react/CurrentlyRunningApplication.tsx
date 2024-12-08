@@ -9,7 +9,9 @@ const APP_TO_IMAGE_ICON_HASHMAP: {
   "Postman": "postman.svg",
   "Visual Studio IDE": "visual_studio.svg",
   "Obsidian": "obsidian-icon.svg",
-  "Chrome": "chrome.svg"
+  "Chrome": "chrome.svg",
+  "Blender": "blender.png",
+  "Unity": "unity.svg"
 };
 
 interface OnlineStatusChipProps {
