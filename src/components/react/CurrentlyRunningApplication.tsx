@@ -11,7 +11,8 @@ const APP_TO_IMAGE_ICON_HASHMAP: {
   "Obsidian": "obsidian-icon.svg",
   "Chrome": "chrome.svg",
   "Blender": "blender.png",
-  "Unity": "unity.svg"
+  "Unity": "unity.svg",
+  "Docker Desktop": "docker.png"
 };
 
 interface OnlineStatusChipProps {
