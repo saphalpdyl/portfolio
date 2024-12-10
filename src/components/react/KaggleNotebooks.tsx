@@ -79,7 +79,7 @@ export default function KaggleNotebooks({}: Props) {
       ${
         // Implement pagination
         notebooks!.length > 4 ? 
-          "h-60 md:grid md:grid-cols-1 lg:grid-cols-2" 
+          "h-60 md:grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3" 
           : ""
       }
     `}>
