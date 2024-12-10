@@ -110,11 +110,11 @@ function CurrentlyRunningApplication() {
               className={`
                 h-8 w-8 
                 ${processData[processName] ? "scale-110" : "scale-90"}
+                hover:scale-110
                 transition-all ease-in-out duration-500
+                hover:grayscale-0 grayscale
+                ${processData[processName] === false ? "grayscale" : "grayscale-0"}
               `}
-              style={{
-                filter: `grayscale(${processData[processName] === false ? "1.0": "0.0"})`
-              }}
             >
               <img src={`/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt={`${processName} icon`} />
             </div>
