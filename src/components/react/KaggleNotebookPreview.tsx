@@ -31,8 +31,8 @@ export default function KaggleNotebookPreview({
     <div className={`
         transition-all delay-200 group-hover:opacity-100 opacity-0 left-20 bottom-10 group-hover:pointer-events-auto pointer-events-none 
         absolute z-[30] 
-        xl:w-[40rem] lg:w-96 md:w-[40rem] hidden md:block
-        
+        xl:w-[40rem] lg:w-96 md:w-[40rem] hidden lg:block
+
         overflow-y-auto
         overflow-x-hidden
         ${htmlContent ? "h-96" : "h-24"} 

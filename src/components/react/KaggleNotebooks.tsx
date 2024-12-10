@@ -75,11 +75,11 @@ export default function KaggleNotebooks({}: Props) {
 
   return <div 
     className={`
-      flex flex-col gap-2 my-2
+      flex flex-col gap-2 my-2 overflow-x-hidden overflow-y-auto
       ${
         // Implement pagination
         notebooks!.length > 4 ? 
-          "h-60 grid grid-cols-1 lg:grid-cols-2" 
+          "h-60 md:grid md:grid-cols-1 lg:grid-cols-2" 
           : ""
       }
     `}>
@@ -87,7 +87,7 @@ export default function KaggleNotebooks({}: Props) {
       notebooks!.map(notebook => (
         <div 
           onMouseEnter={() => fetchNotebookHTMLData(notebook.filepath)}
-          className="relative group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
+          className="static group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
         >
           <KaggleNotebookPreview htmlContent={notebook.htmlContent} title={notebook.title}/>
           <a 
