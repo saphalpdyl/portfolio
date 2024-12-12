@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { actions } from "astro:actions";
 import Skeleton from "./common/Skeleton";
 
+const IGNORE_REPOS_FOR_PROJECT_LANGUAGES = [
+  "saphalpdyl"
+]
+
 interface Repository {
   description: string;
   name: string;
@@ -21,13 +25,14 @@ interface Repository {
 
 type ProjectCardProps = {
   project: Repository,
+  className?: string,
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
+function ProjectCard({ project, className }: ProjectCardProps) {
   let readmeData = !project.masterReadme ? !project.mainReadme ? null : project.mainReadme : project.masterReadme;
 
   let languagesUsedSrc = "";
-  if (readmeData) {
+  if (readmeData && !IGNORE_REPOS_FOR_PROJECT_LANGUAGES.includes(project.name)) {
     // I usually have line in my README.md that shows the langauges I have used
     // [![Tech Stack](https://skillicons.dev/icons?i=go)]()
     // I am searching for this line
@@ -43,11 +48,13 @@ function ProjectCard({ project }: ProjectCardProps) {
     }
   } 
   
-  return <div className="flex flex-col px-4 py-2 border-[1px] border-gray-400 rounded-lg min-h-20">
-    <div className="flex justify-between">
+  return <div className={`flex flex-col px-4 py-2 border-[1px] border-gray-400 rounded-lg min-h-20 ${className}`}>
+    <div className="flex justify-between flex-wrap">
       <span className="text-md font-semibold text-blue-500">{ project.name }</span>
       {
-        readmeData && <img src={languagesUsedSrc} alt="Langauges Used Icons" className="h-8" />
+        readmeData && 
+        !IGNORE_REPOS_FOR_PROJECT_LANGUAGES.includes(project.name) && 
+        <img src={languagesUsedSrc} alt="Langauges Used Icons" className="lg:h-5 2xl:h-6 h-8" />
       }
     </div>
     <a target="_blank" href={project.url} className="text-[11px] text-gray-800 underline cursor-pointer hover:text-black">{ project.nameWithOwner }</a>
@@ -63,7 +70,7 @@ function TopProjects({ projectsLogo }: TopProjectsProps) {
   const [ projects, setProjects ] = useState<null | Repository[]>(null);
 
   async function _refreshProjects() {
-    const data = await actions.getTopRepositories({ top: 3 });
+    const data = await actions.getTopRepositories({ top: 6 });
     setProjects(data.data);
   }
   
@@ -88,9 +95,12 @@ function TopProjects({ projectsLogo }: TopProjectsProps) {
         </div>
         Top projects
       </span>
-      <div className="flex flex-col gap-4">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
         {
-          projects.map(proj => <ProjectCard project={proj} />)
+          projects.slice(0,3).map(proj => <ProjectCard project={proj} />)
+        }
+        {
+          projects.slice(3,6).map(proj => <ProjectCard project={proj} className="2xl:block hidden" />)
         }
       </div>
     </div>
