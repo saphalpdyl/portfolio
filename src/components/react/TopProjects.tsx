@@ -56,7 +56,7 @@ function TopProjects({ projectsLogo }: TopProjectsProps) {
         <div className="w-6 h-6">
           { projectsLogo }
         </div>
-        Top Projects
+        Top projects
       </span>
       <div className="flex flex-col gap-4">
         {
