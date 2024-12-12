@@ -22,6 +22,16 @@ export default defineAction({
                           nameWithOwner
                           description
                           url
+                          masterReadme: object(expression: "master:README.md") {
+                              ... on Blob {
+                                text
+                              }
+                          }
+                          mainReadme: object(expression: "main:README.md") {
+                              ... on Blob {
+                                text
+                              }
+                          }
                       }
                   }
               }

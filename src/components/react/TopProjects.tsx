@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { actions } from "astro:actions";
-import Spinner from "./Spinner";
 import Skeleton from "./common/Skeleton";
 
 interface Repository {
@@ -9,6 +8,15 @@ interface Repository {
   name: string;
   nameWithOwner: string;
   url: string;
+
+  // README data
+  masterReadme?: {
+    text: string
+  }
+
+  mainReadme?: {
+    text: string
+  }
 }
 
 type ProjectCardProps = {
@@ -16,9 +24,31 @@ type ProjectCardProps = {
 }
 
 function ProjectCard({ project }: ProjectCardProps) {
+  let readmeData = !project.masterReadme ? !project.mainReadme ? null : project.mainReadme : project.masterReadme;
+
+  let languagesUsedSrc = "";
+  if (readmeData) {
+    // I usually have line in my README.md that shows the langauges I have used
+    // [![Tech Stack](https://skillicons.dev/icons?i=go)]()
+    // I am searching for this line
+
+    const skillIconsLine = readmeData.text.split("\n").find(line => line.match("skillicons"))
+    const pattern = /\((https?:\/\/[^\)]+)\)/;
+
+    const match = skillIconsLine?.match(pattern);
+    if (!match) {
+      readmeData = null; // No match was found
+    } else {
+      languagesUsedSrc = match[1];
+    }
+  } 
+  
   return <div className="flex flex-col px-4 py-2 border-[1px] border-gray-400 rounded-lg min-h-20">
-    <div>
+    <div className="flex justify-between">
       <span className="text-md font-semibold text-blue-500">{ project.name }</span>
+      {
+        readmeData && <img src={languagesUsedSrc} alt="Langauges Used Icons" className="h-8" />
+      }
     </div>
     <a target="_blank" href={project.url} className="text-[11px] text-gray-800 underline cursor-pointer hover:text-black">{ project.nameWithOwner }</a>
     <p className="text-xs text-gray-600 mt-2">{ project.description }</p>
