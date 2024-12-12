@@ -49,7 +49,7 @@ function ProjectCard({ project, className }: ProjectCardProps) {
   } 
   
   return <div className={`flex flex-col px-4 py-2 border-[1px] border-gray-400 rounded-lg min-h-20 ${className}`}>
-    <div className="flex justify-between flex-wrap">
+    <div className="flex justify-between flex-wrap gap-y-4 ">
       <span className="text-md font-semibold text-blue-500">{ project.name }</span>
       {
         readmeData && 
