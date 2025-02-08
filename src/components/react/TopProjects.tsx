@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { actions } from "astro:actions";
 import Skeleton from "./common/Skeleton";
+import SectionTitle from "../astro/SectionTitle.astro";
 
 const IGNORE_REPOS_FOR_PROJECT_LANGUAGES = [
   "saphalpdyl"
@@ -88,13 +89,8 @@ function TopProjects({ projectsLogo }: TopProjectsProps) {
   )
   
   return (
-    <div className="flex flex-col gap-2">
-      <span className="flex gap-2 font-serif font-semibold text-lg underline">
-        <div className="w-6 h-6">
-          { projectsLogo }
-        </div>
-        Top projects
-      </span>
+    <div className="flex flex-col">
+      <p className="font-serif text-xs mb-2">The projects that I have been publicly involved in recently.</p>
       <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
         {
           projects.slice(0,3).map(proj => <ProjectCard project={proj} />)

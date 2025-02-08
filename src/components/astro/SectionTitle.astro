@@ -9,11 +9,11 @@ interface Props {
 const { logo, text } = Astro.props;
 ---
 
-<span class="flex gap-2 font-serif font-semibold text-lg underline">
-  {
+<span class="flex gap-2 font-semibold text-xl font-serif mb-2">
+  <!-- {
     logo && <div class="w-6 h-6">
         <Image src={logo} alt="App Window logo"/>
     </div>
-  }
+  } -->
   { text }
 </span>

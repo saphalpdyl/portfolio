@@ -66,8 +66,8 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 
 			<div class="flex mb-10 flex-col lg:flex-row lg:w-full w-full sm:w-auto gap-10 my-4 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1 flex flex-col gap-2 font-serif">
-					<SectionTitle logo={AppWindow} text="About me" />
-					<p class="text-xs">No, I don't drink coffee, and I write tests!</p>
+					<SectionTitle logo={AppWindow} text="😄 About me" />
+					<p class="text-xs">I love to build cool stuff!</p>
 					<p class="text-xs">I'm Saphal Poudyal, currently based on Hattiesburg, Mississppi, USA. Starting out as a self-taught programmer, I have found myself ruffling around software development and machine learning.</p>
 					<div class="flex gap-3 flex-col sm:flex-row flex-wrap">
 						<SocialLink
@@ -127,7 +127,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 
 				</div>
 				<div class="flex-1">
-					<SectionTitle logo={School} text="Education" />
+					<SectionTitle logo={School} text="🎓 Education" />
 					<div class="lg:divide-y-2 flex flex-col sm:flex-row sm:justify-between lg:flex-col gap-4">
 						<EducationItem 
 							education="Bachelor's in Computer Science"
@@ -146,7 +146,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 			</div>
 			<div class="flex mb-10 lg:flex-row flex-col lg:w-full w-full gap-10 lg:max-w-[70%] max-w-[100%]">
 				<div class="w-full flex flex-col items-start flex-1">
-					<SectionTitle logo={KeyboardLogo} text="Experience" />
+					<SectionTitle logo={KeyboardLogo} text="⌛ Experience" />
 					<p class="text-xs font-serif mb-2">These are my professional experiences through different roles in the industry from the newest to oldest.</p>
 					<Experience>
 						<ExperienceItem
@@ -201,14 +201,15 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 						/>
 					</Experience>
 				</div>
-				<div class="flex-1 flex flex-col gap-5">
+				<div class="flex-1 flex flex-col">
+					<SectionTitle text="💾 Top Projects" />
 					<TopProjects client:idle>
 						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
 					</TopProjects>
-					<div class="relative">
+					<div class="relative mt-5">
 						<div class="flex items-center justify-start w-full gap-2">
-							<Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/>
-							<SectionTitle text="Notebooks" />
+							<!-- <Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/> -->
+							<SectionTitle text="📔 Notebooks" />
 						</div>
 						<p class="text-xs font-serif">
 							&nbsp; I also have great passion in Exploratory Data Analysis and Kaggle competitions. Below is the collection of my latest notebooks on Kaggle.
