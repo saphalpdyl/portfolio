@@ -59,7 +59,7 @@ function ProjectCard({ project, className }: ProjectCardProps) {
       }
     </div>
     <a target="_blank" href={project.url} className="text-[11px] text-gray-800 underline cursor-pointer hover:text-black">{ project.nameWithOwner }</a>
-    <p className="text-xs text-gray-600 mt-2">{ project.description }</p>
+    <p className="text-md text-gray-600 mt-2 font-serif line-clamp-2">{ project.description }</p>
   </div>
 }
 
@@ -90,7 +90,7 @@ function TopProjects({ projectsLogo }: TopProjectsProps) {
   
   return (
     <div className="flex flex-col">
-      <p className="font-serif text-xs mb-2">The projects that I have been publicly involved in recently.</p>
+      <p className="font-serif text-md mb-2">The projects that I have been publicly involved in recently.</p>
       <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
         {
           projects.slice(0,3).map(proj => <ProjectCard project={proj} />)

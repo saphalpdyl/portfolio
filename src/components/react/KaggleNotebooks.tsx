@@ -87,7 +87,7 @@ export default function KaggleNotebooks({}: Props) {
       notebooks!.map((notebook, index) => (
         <div 
           onMouseEnter={() => fetchNotebookHTMLData(notebook.filepath)}
-          className="static group px-4 py-2 text-xs font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
+          className="static group px-4 py-2 text-md font-serif border-[1px] border-gray-400 rounded-lg flex flex-col gap-1"
         >
           {/* DISABLING NOTEBOOK PREVIEW FOR NOW */}
           {/* <KaggleNotebookPreview htmlContent={notebook.htmlContent} title={notebook.title}/> */}
@@ -101,7 +101,7 @@ export default function KaggleNotebooks({}: Props) {
           <span className="text-gray-500 text-[11px] font-mono">Group: Kaggle Notebooks</span>
 
           {
-            index == 1 && <p className="absolute bottom-0 right-0 text-xs font-serif lg:block hidden text-gray-400 font-light p-1">Hover to show preview</p>
+            index == 1 && <p className="absolute bottom-0 right-0 text-md font-serif lg:block hidden text-gray-400 font-light p-1">Hover to show preview</p>
           }
         </div>
       ))

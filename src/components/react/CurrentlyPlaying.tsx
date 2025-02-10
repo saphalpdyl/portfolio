@@ -60,11 +60,11 @@ function CurrentlyPlaying({
   </div>
 
   if ( offline ) return (
-    <div className="flex items-center py-1 px-2 bg-gray-50 border-2 border-gray-300 justify-center gap-2 rounded-lg text-gray-800 font-serif text-xs">
+    <div className="flex items-center py-1 px-2 bg-gray-50 border-2 border-gray-300 justify-center gap-2 rounded-lg text-gray-800 font-serif text-md">
       <div className="w-4 h-4">
         { spotifyLogo }
       </div>
-      <span className="text-xs text-gray-600">Saphal is not connected</span>
+      <span className="text-md text-gray-600">Saphal is not connected</span>
     </div>
   )
   
@@ -80,7 +80,7 @@ function CurrentlyPlaying({
             backgroundSize: "cover",
           }}
         />
-        <div className="flex flex-col text-xs">
+        <div className="flex flex-col text-md">
           <div className="flex gap-1 items-center">
             <div className="w-3 h-3">
               { spotifyLogo }

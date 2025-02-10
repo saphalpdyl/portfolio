@@ -67,8 +67,8 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 			<div class="flex mb-10 flex-col lg:flex-row lg:w-full w-full sm:w-auto gap-10 my-4 lg:max-w-[70%] max-w-[100%]">
 				<div class="flex-1 flex flex-col gap-2 font-serif">
 					<SectionTitle logo={AppWindow} text="😄 About me" />
-					<p class="text-xs">I love to build cool stuff!</p>
-					<p class="text-xs">I'm Saphal Poudyal, currently based on Hattiesburg, Mississppi, USA. Starting out as a self-taught programmer, I have found myself ruffling around software development and machine learning.</p>
+					<p class="text-md">I love to build cool stuff!</p>
+					<p class="text-md">I'm Saphal Poudyal, currently based on Hattiesburg, Mississppi, USA. Starting out as a self-taught programmer, I have found myself ruffling around software development and machine learning.</p>
 					<div class="flex gap-3 flex-col sm:flex-row flex-wrap">
 						<SocialLink
 							logo={Github}
@@ -95,17 +95,17 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 							href="#"
 						/>
 					</div>
-					<p class="text-xs italic">I'm always enthusiastic towards collaboration. I'm generally active on all the platforms mentioned above. If interested, please contact me through mail.</p>
+					<p class="text-md italic">I'm always enthusiastic towards collaboration. I'm generally active on all the platforms mentioned above. If interested, please contact me through mail.</p>
 
 					<hr>
-					<p class="text-xs">For professional information on my skills and experience, view my resume:</p>
+					<p class="text-md">For professional information on my skills and experience, view my resume:</p>
 					<!-- Resume  -->
 					<div class="flex flex-col gap-1">
 						<div class="flex items-center gap-1">
 							<div class="w-4 h-4">
 								<Image src={Eye} alt="View Icon" />
 							</div>
-							<p class="text-xs font-bold">
+							<p class="text-md font-bold">
 								View my
 								<a class="text-blue-500 underline cursor-pointer" target="_blank" href={ResumeURL} aria-label="View resume">resume</a>
 								.
@@ -115,7 +115,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 							<div class="w-4 h-4">
 								<Image src={FileDown} alt="View Icon" />
 							</div>
-							<p class="text-xs font-bold">
+							<p class="text-md font-bold">
 								Download my
 								<a class="text-blue-500 underline cursor-pointer" href={ResumeURL} download aria-label="Download resume">resume</a>
 								.
@@ -147,7 +147,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 			<div class="flex mb-10 lg:flex-row flex-col lg:w-full w-full gap-10 lg:max-w-[70%] max-w-[100%]">
 				<div class="w-full flex flex-col items-start flex-1">
 					<SectionTitle logo={KeyboardLogo} text="⌛ Experience" />
-					<p class="text-xs font-serif mb-2">These are my professional experiences through different roles in the industry from the newest to oldest.</p>
+					<p class="text-md font-serif mb-2">These are my professional experiences through different roles in the industry from the newest to oldest.</p>
 					<Experience>
 						<ExperienceItem
 							title="Undergraduate Research Assistant"
@@ -211,7 +211,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 							<!-- <Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/> -->
 							<SectionTitle text="📔 Notebooks" />
 						</div>
-						<p class="text-xs font-serif">
+						<p class="text-md font-serif">
 							&nbsp; I also have great passion in Exploratory Data Analysis and Kaggle competitions. Below is the collection of my latest notebooks on Kaggle.
 						</p>
 						<KaggleNotebooks client:idle/>
@@ -233,7 +233,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 						<Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/>
 						<SectionTitle text="Notebooks" />
 					</div>
-					<p class="text-xs font-serif">
+					<p class="text-md font-serif">
 						&nbsp; I also have great passion in Exploratory Data Analysis and Kaggle competitions. Below is the collection of my latest notebooks on Kaggle.
 					</p>
 					<KaggleNotebooks client:idle/>

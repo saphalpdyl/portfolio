@@ -27,7 +27,7 @@ function Chip({
           animate-pulse
         `}></div>
         <span className={`
-          text-xs font-serif
+          text-md font-serif
           ${type == "loading" ? "" : type == "busy" ? "text-red-700" : "text-green-700"}
         `}>{ text }</span>
       </div>
@@ -64,7 +64,7 @@ function BusyStatusIndicator() {
     }
   }, []);
   
-  if ( error ) return <span className="text-red-500 text-xs"> Widget error: { error }</span>
+  if ( error ) return <span className="text-red-500 text-md"> Widget error: { error }</span>
   
   if ( loading ) {
     return <Chip type="loading" text="Searching calendar for events" />
