@@ -94,15 +94,15 @@ export default function KaggleNotebooks({}: Props) {
           <a 
             href={`/notebooks/${notebook.filepath}`}
             aria-label={notebook.title} 
-            className="text-blue-500 underline cursor-pointer"
+            className="text-blue-500 underline cursor-pointer line-clamp-2"
             >
             { notebook.title }
           </a>  
           <span className="text-gray-500 text-[11px] font-mono">Group: Kaggle Notebooks</span>
 
-          {
+          {/* {
             index == 1 && <p className="absolute bottom-0 right-0 text-md font-serif lg:block hidden text-gray-400 font-light p-1">Hover to show preview</p>
-          }
+          } */}
         </div>
       ))
     }
