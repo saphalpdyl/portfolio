@@ -22,7 +22,6 @@ export const POST: APIRoute = async ({ request }) => {
     }))
   }
 
-  console.log(body.payload)
   dataManager.setData(body.payload);
   
   return new Response(null, {
