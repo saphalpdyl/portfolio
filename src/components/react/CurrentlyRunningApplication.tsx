@@ -55,8 +55,10 @@ function CurrentlyRunningApplication() {
       // @ts-ignore
       const [hasData, data, lastUpdateTime] = (await actions.getProcessStatus()).data;
       
-      const timeSinceLastUpdate = Date.now() - lastUpdateTime;
+      const timeSinceLastUpdate = Date.now() - Date.parse(lastUpdateTime);
       
+      console.log((new Date()).toISOString(), "Last update time:", lastUpdateTime);
+      console.log("Time since last update:", timeSinceLastUpdate, "ms");
       if (!hasData || timeSinceLastUpdate > 10000) {
         setIsConnected(false);
         const emptyHashMap: {
