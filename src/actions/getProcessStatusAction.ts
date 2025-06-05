@@ -1,14 +1,10 @@
 import { defineAction } from "astro:actions";
-import OpenProcessesDataManagerSingleton from "../lib/OpenProcessesDataManager";
 import { 
   DynamoDBClient,
 } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocumentClient, ScanCommand } from "@aws-sdk/lib-dynamodb"
-import { awsCredentialsProvider } from "@vercel/functions/oidc";
 
-const credentials = import.meta.env.DEPLOY_MODE === "prod" ? awsCredentialsProvider({
-  roleArn: import.meta.env.AWS_ROLE_ARN,
-}) : {
+const credentials = {
   accessKeyId: import.meta.env.DYNAMODB_ACCESS_KEY_ID,
   secretAccessKey: import.meta.env.DYNAMODB_SECRET_ACCESS_KEY
 }
