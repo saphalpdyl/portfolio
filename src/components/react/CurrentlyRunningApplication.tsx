@@ -117,6 +117,7 @@ function CurrentlyRunningApplication() {
                 hover:grayscale-0 grayscale
                 ${processData[processName] === false ? "grayscale" : "grayscale-0"}
               `}
+              title={processName}
             >
               <img src={`/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt={`${processName} icon`} />
             </div>
