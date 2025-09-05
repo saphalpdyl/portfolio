@@ -52,8 +52,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 			<DevelopmentBanner />
 			<span class="text-5xl font-serif font-semibold">Saphal K. Poudyal</span>
 			<div class="font-[100] italic font-serif">
-				Full-stack developer | 
-				Research Assistant at The University of Southern Mississippi
+				Built & Launched Startup Platforms | Full-Stack Developer
 			</div>
 			<div class="flex flex-col-reverse w-full sm:w-auto sm:flex-row gap-2">
 				<BusyStatusIndicator client:idle />
@@ -64,18 +63,21 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 			<div class="flex flex-col items-center w-full gap-0 lg:max-w-[70%] xl:max-w-[40%] max-w-[100%]">
 				<div class="hidden sm:flex flex-row p-2 gap-2">
 					<a href="#about-me" class="text-md font-serif text-blue-500 underline cursor-pointer"> About me </a> /
-					<a href="#experience" class="text-md font-serif text-blue-500 underline cursor-pointer"> Experience </a> /
 					<a href="#top-projects" class="text-md font-serif text-blue-500 underline cursor-pointer"> Top Projects </a> /
-					<a href="#notebooks" class="text-md font-serif text-blue-500 underline cursor-pointer"> Notebooks </a> /
-					<a href="#top-languages" class="text-md font-serif text-blue-500 underline cursor-pointer"> Top Languages </a>
+					<a href="#experience" class="text-md font-serif text-blue-500 underline cursor-pointer"> Experience </a>
+					<!-- <a href="#notebooks" class="text-md font-serif text-blue-500 underline cursor-pointer"> Notebooks </a> / -->
 				</div>
 			</div>	
 						
 			<div id="about-me" class="flex mb-10 flex-col w-full gap-10 my-4 lg:max-w-[70%] xl:max-w-[40%] max-w-[100%]">
 				<div class="flex-1 flex flex-col gap-2 font-serif">
-					<SectionTitle logo={AppWindow} text="😄 About me" />
-					<p class="text-md">I love to build cool stuff!</p>
-					<p class="text-md">I'm Saphal Poudyal, currently based on Hattiesburg, Mississppi, USA. Starting out as a self-taught programmer, I have found myself ruffling around software development and machine learning.</p>
+					<SectionTitle logo={AppWindow} text="About Me" />
+						<p class="text-md">I design and ship scalable, full-stack systems for real-world impact.</p>
+						<p class="text-md">
+						I'm Saphal Poudyal, a CS sophomore and founding engineer in Hattiesburg, Mississippi. 
+						I build across frontend, backend, and cloud infrastructure—turning ideas into production-ready platforms.
+						</p>
+
 					<div class="flex gap-3 flex-col sm:flex-row flex-wrap">
 						<SocialLink
 							logo={Github}
@@ -102,7 +104,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 							href="#"
 						/>
 					</div>
-					<p class="text-md italic">I'm always enthusiastic towards collaboration. I'm generally active on all the platforms mentioned above. If interested, please contact me through mail.</p>
+					<p class="text-md italic">Passionate about building full-stack systems and AI-powered tools. Let’s collaborate — reach me at <a class="text-blue-500 underline" href="mailto:saphalpdyl@gmail.com">saphalpdyl@gmail.com</a>.</p>
 
 					<hr>
 					<p class="text-md">For professional information on my skills and experience, view my resume:</p>
@@ -158,9 +160,9 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 					<TopProjects client:idle>
 						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
 					</TopProjects>
-					<div id="notebooks" class="relative mt-5">
+					<!-- <div id="notebooks" class="relative mt-5">
 						<div class="flex items-center justify-start w-full gap-2">
-							<!-- <Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/> -->
+							<!-- <Image src={KaggleLogo} alt="Kaggle Logo" height={10} width={90}/>
 							<SectionTitle text="📔 Notebooks" />
 						</div>
 						<p class="text-md font-serif">
@@ -170,13 +172,28 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 						<a href="https://www.github.com/saphalpdyl/gcms" target="_blank" class="text-[11px] font-serif font-thing italic text-gray-600">
 							Powered by <span class="underline">GCMS</span>, saphalpdyl
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<div class="w-full flex flex-col items-start flex-1">
 					<SectionTitle logo={KeyboardLogo} text="⌛ Experience" />
 					<p class="text-md font-serif mb-2">These are my professional experiences through different roles in the industry from the newest to oldest.</p>
 					<Experience>
 						<ExperienceItem
+							title="Founding Engineer"
+							company="MagnoliaEd LLC (Microsoft-Powered Startup)"
+							dateFrom="Jan 2025"
+							dateTo="Present"
+							experiences={[
+								"Led end-to-end product development, securing $50,000 in seed funding and driving the startup from concept to execution.",
+								"Architected and provisioned resilient AWS cloud infrastructure, optimizing cost and reducing operational expenses by over 60% through strategic trade-offs between managed and self-managed services.",
+								"Engineered a modular FastAPI backend, designed for scalability while maintaining efficiency for early-stage operations.",
+								"Built a multi-app Turborepo + Next.js infrastructure, enabling shared logic/design and cutting deployment times by 50% with smart caching strategies.",
+								"Designed robust API contracts and database schemas, ensuring seamless integration across the modular backend and unified data infrastructure."
+							]}
+							tags={["AWS", "Terraform", "FastAPI", "PostgreSQL", "Next.js", "Turborepo", "Docker", "CI/CD"]}
+							/>
+
+							<ExperienceItem
 							title=".NET Core & Machine Learning Intern"
 							company="Prediction3D Technologies"
 							dateFrom="May 2025"
@@ -186,9 +203,10 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 								"Implemented hybrid OAuth2 authentication system using FedCM with PKCE fallback, integrating Supabase identity provider with .NET API for cross-browser compatibility and optimal UX.",
 								"Implemented stateful conversation management with database checkpointing, enabling context-aware multi-turn interactions while maintaining conversation history across sessions.",
 							]}
-						/>
-						
-						<ExperienceItem
+							tags={["C#", ".NET Core", "LangChain", "LangGraph", "Supabase", "OAuth2", "Machine Learning"]}
+							/>
+
+							<ExperienceItem
 							title="Undergraduate Research Assistant"
 							company="The University of Southern Mississippi Construction and Design"
 							dateFrom="Nov 2024"
@@ -197,10 +215,11 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 								"Developing a research-based interactive gaming environment in Unity Engine using tools such as Blender, Adobe Substance Painter, Materialize and so on.",
 								"Reviewing and filtering to provide quality data for research purposes.",
 								"Created an AI-powered automated dev-log workflow between myself and supervisors in Google workspaces with Google Apps Script(GAS) reducing time required on reviewing by 17% (~7 minutes).",
-
 							]}
-						/>
-						<ExperienceItem
+							tags={["Unity", "Blender", "Substance Painter", "Materialize", "Google Apps Script"]}
+							/>
+
+							<ExperienceItem
 							title="Flutter Developer"
 							company="BTech Ltd."
 							dateFrom="May 2024"
@@ -211,9 +230,10 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 								"Managed project timelines and deliverables to ensure on-time completion and high-quality results completing project 11 days earlier than the deadline.",
 								"Collaborated with the client to gather requirements, provide regular updates, and incorporate feedback into the application."
 							]}
-						/>
+							tags={["Flutter", "Dart", "Clean Architecture", "SOLID", "ERP Systems"]}
+							/>
 
-						<ExperienceItem
+							<ExperienceItem
 							title="Django Instructor"
 							company="Sipalaya Infotech Pvt. Ltd."
 							dateFrom="Oct 2023"
@@ -222,9 +242,10 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 								"Successfully delivered Django programming course for 3 batches of students, with 9 students managing to land an internship within a month of course completion.",
 								"Developed and presented course materials, leveraging rapid mastery of programming concepts to effectively educate students."
 							]}
-						/>
+							tags={["Django", "Python"]}
+							/>
 
-						<ExperienceItem
+							<ExperienceItem
 							title="Full-stack Python Developer Intern"
 							company="Sipalaya Infotech Pvt. Ltd."
 							dateFrom="Oct 2023"
@@ -235,9 +256,10 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 								"Reformed the previous billing system with keyboard shortcuts and macros increasing user experience by 30%.",
 								"Re-documented 99% of the views and service functions using PyDoc learning test driven development(TDD).",
 								"Maintained Continuous Integration (CI) through GitHub Actions and Django Tests and communication through Jira.",
-
 							]}
-						/>
+							tags={["Python", "Django", "PostgreSQL", "React", "Redux", "Zustand", "REST APIs", "CI/CD"]}
+							/>
+
 					</Experience>
 				</div>
 			</div>

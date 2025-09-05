@@ -6,9 +6,10 @@ interface Props {
   dateFrom: string;
   dateTo: string;
   experiences: string[];
+  tags?: string[]
 }
 
-const { title, company, dateFrom, dateTo, experiences } = Astro.props;
+const { title, company, dateFrom, dateTo, experiences, tags } = Astro.props;
 ---
 
 <div class="mb-2 relative">
@@ -21,12 +22,19 @@ const { title, company, dateFrom, dateTo, experiences } = Astro.props;
     <div class="text-sm -mt-1">
       <em class="text-gray-500 italic">{company}</em>
     </div>
-    <ul class="list-none pl-2 m-0 text-md space-y-1 mt-2">
+    {
+      tags && tags.map(tag => (
+        <span class="inline-block text-gray-800 bg-gray-50 text-[0.8rem] px-2 rounded-full mr-1 mt-1 border border-gray-300">{tag}</span>
+      ))
+    }
+    <br class="my-2" />
+
+    <ul class="list-outside list-['-__'] pl-4 m-0 text-md space-y-1 mt-2">
       {
         experiences.map(ex => (
-          <p>
-            - {ex}
-          </p>
+          <li>
+          {ex}
+          </li>
         ))
       }
     </ul>
