@@ -55,7 +55,7 @@ function ProjectCard({ project, className }: ProjectCardProps) {
       {
         readmeData && 
         !IGNORE_REPOS_FOR_PROJECT_LANGUAGES.includes(project.name) && 
-        <img src={languagesUsedSrc} alt="Langauges Used Icons" className="lg:h-5 2xl:h-6 h-8" />
+        <img src={languagesUsedSrc} alt="" className="lg:h-5 2xl:h-6 h-8" />
       }
     </div>
     <a target="_blank" href={project.url} className="text-[11px] text-gray-800 underline cursor-pointer hover:text-black">{ project.nameWithOwner }</a>
