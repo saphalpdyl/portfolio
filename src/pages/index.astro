@@ -29,7 +29,6 @@ import KeyboardLogo from "../assets/icons/keyboard.svg";
 
 import ResumeURL from "/public/Resume.pdf";
 import KaggleNotebooks from "../components/react/KaggleNotebooks";
-import BackgroundWeb from "../components/react/BackgroundWeb";
 ---
 
 <html lang="en">
@@ -47,7 +46,6 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 		</style>
 	</head>
 	<body class="overflow-x-hidden">
-		<BackgroundWeb radius={120} numPoints={300} client:idle />
 		<div id="root" class="flex flex-col gap-2 w-screen items-center p-10">
 			<DevelopmentBanner />
 			<span class="text-5xl font-serif font-semibold">Saphal K. Poudyal</span>
@@ -297,7 +295,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 				</div>
 			</div> -->
 
-			<div id="top-languages" class="flex flex-col lg:w-full w-full gap-10 lg:max-w-[70%] xl:max-w-[40%] max-w-[100%] my-3">
+			<!-- <div id="top-languages" class="flex flex-col lg:w-full w-full gap-10 lg:max-w-[70%] xl:max-w-[40%] max-w-[100%] my-3">
 				<div class="flex-1">
 					<TopLanguages client:idle>
 							<Image slot="githubLogo" src={GithubLogo} alt="Github logo"/>
@@ -305,7 +303,7 @@ import BackgroundWeb from "../components/react/BackgroundWeb";
 				</div>
 				<div class="flex-1">
 				</div>
-			</div>
+			</div> -->
 
 			<div class="w-full flex flex-col items-center text-gray-300 text-xs font-serif">
 				<span>Copyright © 2025 | Saphal Kumar Poudyal</span>
