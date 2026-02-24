@@ -13,7 +13,8 @@ const APP_TO_IMAGE_ICON_HASHMAP: {
   "Unity": "unity.svg",
   "Blender": "blender.png",
   "Docker Desktop": "docker.png",
-  "Zen": "zen.svg"
+  "Zen": "zen.svg",
+  "Firefox": "firefox.png"
 };
 
 interface OnlineStatusChipProps {
