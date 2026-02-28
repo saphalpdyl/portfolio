@@ -6,7 +6,22 @@
       "persistent": true
     },
     "build": {
-      "outputs": ["dist/**", ".vercel/output/**"]
+      "outputs": ["dist/**", ".vercel/output/**"],
+      "env": [
+        "GOOGLE_CALENDAR_API_KEY",
+        "GOOGLE_CALENDAR_ID",
+        "SPOTIFY_REFRESH_TOKEN",
+        "SPOTIFY_CLIENT_ID",
+        "SPOTIFY_CLIENT_SECRET",
+        "PROCESS_API_SECRET",
+        "DEPLOY_MODE",
+        "IGNORE_REPOSITORIES_IN_TOP_LANGUAGES",
+        "AWS_REGION",
+        "AWS_ROLE_ARN",
+        "DYNAMODB_TABLE_NAME",
+        "DYNAMODB_ACCESS_KEY_ID",
+        "DYNAMODB_SECRET_ACCESS_KEY"
+      ]
     }
   }
 }
