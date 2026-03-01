@@ -56,7 +56,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         )
       }
 
-      <CurrentlyRunningApplication client:idle />
+      <div class="mt-4">
+        <CurrentlyRunningApplication client:idle />
+      </div>
 
     </section>
 

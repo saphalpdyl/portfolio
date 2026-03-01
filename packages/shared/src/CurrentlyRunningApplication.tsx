@@ -11,6 +11,7 @@ import blenderPng from "./assets/blender.png?url";
 import dockerPng from "./assets/docker.png?url";
 import zenSvg from "./assets/zen.svg?url";
 import firefoxPng from "./assets/firefox.png?url";
+import Skeleton from "./Skeleton";
 
 export const APP_TO_IMAGE_ICON_HASHMAP: {
   [_: string]: string;
@@ -112,7 +113,9 @@ export function CurrentlyRunningApplication({
     };
   }, []);
 
-  if (!processData) return <span className="text-md font-serif">Connecting...</span>;
+  if (!processData) return (
+    <Skeleton className="w-full h-16 rounded-lg" />
+  );
   
   return (
     <div className="flex flex-col border-[1px] bg-gray-100/60 shadow-sm border-gray-100 rounded-lg py-1 px-2">

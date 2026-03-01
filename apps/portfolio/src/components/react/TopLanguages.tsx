@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { actions } from "astro:actions";
 
 import Spinner from "./Spinner";
-import Skeleton from "./common/Skeleton";
+import { Skeleton } from "@saphal/shared";
 
 const PROGRESS_BAR_TOTAL_LENGTH = 20;
 const PROGRESS_BAR_SMALL_TOTAL_LENGTH = 10;

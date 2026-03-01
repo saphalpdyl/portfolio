@@ -6,3 +6,5 @@ export {
 } from "./CurrentlyRunningApplication";
 
 export { getProcessDataFromRemote } from "./getProcessData";
+
+export { Skeleton } from "./Skeleton";

@@ -1,6 +1,6 @@
 import { actions } from "astro:actions"
 import { useEffect, useState } from "react";
-import Skeleton from "./common/Skeleton";
+import { Skeleton } from "@saphal/shared";
 import KaggleNotebookPreview from "./KaggleNotebookPreview";
 
 type Props = {}

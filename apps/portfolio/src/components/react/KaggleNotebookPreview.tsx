@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import Skeleton from './common/Skeleton';
+import { Skeleton } from "@saphal/shared";
 
 type Props = {
   htmlContent?: string;

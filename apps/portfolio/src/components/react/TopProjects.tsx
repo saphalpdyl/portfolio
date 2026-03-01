@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { actions } from "astro:actions";
-import Skeleton from "./common/Skeleton";
+import { Skeleton } from "@saphal/shared";
 import SectionTitle from "../astro/SectionTitle.astro";
 
 const IGNORE_REPOS_FOR_PROJECT_LANGUAGES = [
