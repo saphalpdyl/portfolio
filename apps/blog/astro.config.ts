@@ -18,6 +18,9 @@ export default defineConfig({
   site: SITE.website,
   output: "server",
   adapter: vercel(),
+  security: {
+    checkOrigin: false,
+  },
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),

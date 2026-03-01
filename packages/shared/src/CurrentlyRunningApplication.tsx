@@ -75,8 +75,9 @@ export function CurrentlyRunningApplication({
   
   async function refreshProcessStatus() {
     try {
-      // @ts-ignore
-      const [hasData, data, lastUpdateTime] = (await fetchProcessStatus());
+      const result = await fetchProcessStatus();
+      if (!result) throw new Error("No data");
+      const [hasData, data, lastUpdateTime] = result;
       
       const timeSinceLastUpdate = Date.now() - Date.parse(lastUpdateTime);
       

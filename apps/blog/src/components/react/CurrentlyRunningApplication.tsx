@@ -5,9 +5,9 @@ import {
 } from "@saphal/shared";
 
 async function fetchProcessStatus(): Promise<ProcessStatusResult> {
-  // @ts-ignore
-  const result = (await actions.getProcessStatus()).data;
-  return result as ProcessStatusResult;
+  const response = await actions.getProcessStatus();
+  if (!response?.data) return [false, {}, null];
+  return response.data as ProcessStatusResult;
 }
 
 export default function CurrentlyRunningApplication() {
