@@ -7,15 +7,15 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
+  --background: #ffffff;
   --foreground: #282728;
   --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  --muted: #e6e4df;
+  --border: #ece9e4;
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
+  --background: #22261f;
   --foreground: #eaedf3;
   --accent: #ff6b01;
   --muted: #343f60;
@@ -42,6 +42,17 @@ html[data-theme="dark"] {
   }
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
+    position: relative;
+    z-index: 1;
+  }
+  html::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    filter: url(#grain);
+    opacity: .3;
   }
   a,
   button {
