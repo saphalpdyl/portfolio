@@ -52,7 +52,7 @@ html[data-theme="dark"] {
     z-index: 0;
     pointer-events: none;
     filter: url(#grain);
-    opacity: .3;
+    opacity: .15;
   }
   a,
   button {

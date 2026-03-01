@@ -1,11 +1,11 @@
 ---
 pubDatetime: 2026-02-28
-modDatetime: 2026-02-28
+modDatetime: 2026-03-01
 title: Designing the brain of Internet Service Providers- The BNGs
 author: Sat Naing
 slug: designing-the-bng
 featured: true
-draft: false
+draft: true
 tags:
     - Non-technical
     - Aether
