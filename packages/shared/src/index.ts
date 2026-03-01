@@ -5,7 +5,4 @@ export {
   type CurrentlyRunningApplicationProps,
 } from "./CurrentlyRunningApplication";
 
-export {
-  getProcessDataFromRemote,
-  type DynamoDBConfig,
-} from "./getProcessData";
+export { getProcessDataFromRemote } from "./getProcessData";

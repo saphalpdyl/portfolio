@@ -75,7 +75,7 @@ export function CurrentlyRunningApplication({
   async function refreshProcessStatus() {
     try {
       // @ts-ignore
-      const [hasData, data, lastUpdateTime] = (await fetchProcessStatus()).data;
+      const [hasData, data, lastUpdateTime] = (await fetchProcessStatus());
       
       const timeSinceLastUpdate = Date.now() - Date.parse(lastUpdateTime);
       
@@ -140,7 +140,7 @@ export function CurrentlyRunningApplication({
               `}
               title={processName}
             >
-              <img src={`/${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt={`${processName} icon`} />
+              <img src={`${APP_TO_IMAGE_ICON_HASHMAP[processName]}`} alt={`${processName} icon`} />
             </div>
           );
         })}

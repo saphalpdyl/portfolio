@@ -1,33 +1,18 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, ScanCommand } from "@aws-sdk/lib-dynamodb";
-
-export interface DynamoDBConfig {
-  region: string;
-  credentials: {
-    accessKeyId: string;
-    secretAccessKey: string;
-  };
-  tableName: string;
-}
+import type { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 export async function getProcessDataFromRemote(
-  config: DynamoDBConfig,
+  docClient: DynamoDBDocumentClient,
+  tableName: string,
   sort = false,
   n = 1
 ) {
   try {
-    const dynamoDBClient = new DynamoDBClient({
-      region: config.region,
-      credentials: config.credentials,
-    });
-    const dynamoDBDocumentClient =
-      DynamoDBDocumentClient.from(dynamoDBClient);
-
     const command = new ScanCommand({
-      TableName: config.tableName,
+      TableName: tableName,
     });
 
-    const response = await dynamoDBDocumentClient.send(command);
+    const response = await docClient.send(command);
     let items = response.Items || [];
     if (sort) {
       items = items.sort((a, b) => {
