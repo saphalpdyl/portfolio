@@ -1,0 +1,5 @@
+{
+    "markdown.copyFiles.destination": {
+        "apps/blog/src/**": "${documentDirName}/images/${documentBaseName}/"
+    }
+}
