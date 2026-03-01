@@ -8,3 +8,5 @@ export {
 export { getProcessDataFromRemote } from "./getProcessData";
 
 export { Skeleton } from "./Skeleton";
+
+export { AetherStats, type AetherStatsProps } from "./AetherStats";
