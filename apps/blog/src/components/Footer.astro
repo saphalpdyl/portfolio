@@ -23,10 +23,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     ]}
   >
     <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>Copyright &#169; {currentYear}</span>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>All rights reserved.</span>
+    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row text-xs">
+      <span>Theme based on <a href="https://github.com/satnaing/astro-paper" class="underline text-blue-500">Astro Paper</a> by Sat Naing. Customized by me :) </span>
     </div>
   </div>
 </footer>

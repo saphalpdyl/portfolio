@@ -1,3 +1,4 @@
+export const prerender = true;
 ---
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
@@ -11,6 +12,7 @@ import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
+import CurrentlyRunningApplication from "@/components/react/CurrentlyRunningApplication";
 
 const posts = await getCollection("blog");
 
@@ -53,6 +55,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           </div>
         )
       }
+
+      <CurrentlyRunningApplication client:idle />
+
     </section>
 
     {

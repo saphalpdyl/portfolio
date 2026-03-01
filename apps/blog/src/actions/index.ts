@@ -1,7 +1,7 @@
 import { defineAction } from "astro:actions";
 import { getProcessDataFromRemote } from "@saphal/shared";
 
-export default defineAction({
+const getProcessStatus = defineAction({
   handler: async () => {
     const config = {
       region: import.meta.env.AWS_REGION,
@@ -16,15 +16,15 @@ export default defineAction({
     const processTimestamp: string[] = [];
     const processes = (response || []).map(item => {
       const hmap: {
-        [_: string]: boolean,
+        [_: string]: boolean;
       } = {};
       const payload: {
-        appName: string,
-        isRunning: boolean,
+        appName: string;
+        isRunning: boolean;
       }[] = (item as any).payload || [];
 
       processTimestamp.push(item.createdAt);
-      payload.forEach((process) => {
+      payload.forEach(process => {
         hmap[process.appName] = process.isRunning;
       });
 
@@ -32,5 +32,9 @@ export default defineAction({
     });
 
     return [processes.length > 0, processes[0] || {}, processTimestamp[0] || null];
-  }
+  },
 });
+
+export const server = {
+  getProcessStatus,
+};
