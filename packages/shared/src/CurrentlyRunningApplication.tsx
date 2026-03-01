@@ -63,7 +63,9 @@ export interface CurrentlyRunningApplicationProps {
   fetchProcessStatus: () => Promise<ProcessStatusResult>;
 }
 
-export function CurrentlyRunningApplication() {
+export function CurrentlyRunningApplication({
+  fetchProcessStatus
+}: CurrentlyRunningApplicationProps) {
   const [processData, setProcessData] = useState<{
     [_: string]: boolean,
   } | null>(null);
@@ -73,7 +75,7 @@ export function CurrentlyRunningApplication() {
   async function refreshProcessStatus() {
     try {
       // @ts-ignore
-      const [hasData, data, lastUpdateTime] = (await actions.getProcessStatus()).data;
+      const [hasData, data, lastUpdateTime] = (await fetchProcessStatus()).data;
       
       const timeSinceLastUpdate = Date.now() - Date.parse(lastUpdateTime);
       
