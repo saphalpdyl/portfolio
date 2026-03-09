@@ -29,6 +29,8 @@ import KeyboardLogo from "../assets/icons/keyboard.svg";
 
 import ResumeURL from "/public/Resume.pdf";
 import KaggleNotebooks from "../components/react/KaggleNotebooks";
+
+import { FeaturedAetherCard } from "@saphal/shared"
 ---
 
 <html lang="en">
@@ -155,6 +157,9 @@ import KaggleNotebooks from "../components/react/KaggleNotebooks";
 			<div id="experience" class="flex mb-10  flex-col lg:w-full w-full gap-10 lg:max-w-[70%] xl:max-w-[40%] max-w-[100%]">
 				<div id="top-projects" class="flex-1 flex flex-col">
 					<SectionTitle text="💾 Recent Projects" />
+     				<p class="font-serif text-md mb-2">The projects that I have been publicly involved in recently.</p>
+
+					<FeaturedAetherCard client:idle baseUrl="https://aether.saphal.me"/>
 					<TopProjects client:idle>
 						<Image slot="projectsLogo" src={FolderGit2} alt="Projects logo"/>
 					</TopProjects>
@@ -178,14 +183,16 @@ import KaggleNotebooks from "../components/react/KaggleNotebooks";
 					<Experience>
 						<ExperienceItem
 							title="Software Engineer, Systems & Infrastructure"
-							company="Aquaview ( intiative by National Oceanic and Atmospheric Administration - NOAA )"
+							company="Aquaview ( initiative by National Oceanic and Atmospheric Administration - NOAA )"
 							dateFrom="Jan 2026"
 							dateTo="Present"
 							experiences={[
-								"Designed distributed snapshot management service deployments across multi-server infrastructure",
-								"Led architectural decisions on distributed systems reliability, including crash recovery strategies and resource lifecycle management"
+								"Extracted sandbox provisioning into a standalone Go microservice exposing 9 RPC endpoints across 2 ConnectRPC services, supporting up to 165 concurrent sandboxes across isolated user and automated execution pools",
+								"Designed a supervisor actor-model in Go with a size-64 inbox channel and semaphore-bounded worker goroutines, eliminating shared-state contention across all concurrent RPC handlers",
+								"Built a stale-data reconciliation pipeline handling divergence between the Daytona provider and local registry, covering both orphaned and ghost snapshot edge cases",
+								"Introduced a full local observability stack with OpenTelemetry, Grafana, Loki, and Tempo — wiring distributed tracing through ConnectRPC and MongoDB with trace-log correlation"
 							]}
-							tags={["Google Cloud platform (GCP)","Distributed systems","FastAPI", "React", "CI/CD"]}
+							tags={["Go", "GCP", "Distributed systems", "ConnectRPC", "Protobufs", "MongoDB", "DDD", "OpenTelemetry", "Docker"]}
 							/>
 						
 						<ExperienceItem

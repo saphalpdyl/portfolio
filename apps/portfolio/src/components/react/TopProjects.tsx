@@ -90,7 +90,6 @@ function TopProjects({ projectsLogo }: TopProjectsProps) {
   
   return (
     <div className="flex flex-col">
-      <p className="font-serif text-md mb-2">The projects that I have been publicly involved in recently.</p>
       <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
         {
           projects.slice(0,3).map(proj => <ProjectCard project={proj} />)
